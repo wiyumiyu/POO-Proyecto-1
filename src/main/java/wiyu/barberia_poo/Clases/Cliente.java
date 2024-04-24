@@ -71,7 +71,7 @@ public class Cliente {
     }
     
     
-    public boolean correoEsValido(String email) {
+    public static boolean correoEsValido(String email) {
         // Patron para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(email);
@@ -86,6 +86,7 @@ public class Cliente {
         return matcher.matches();
     } // Phone number Regex | Phone number Regex Java Validator. (n.d.). https://www.akto.io/tools/phone-number-regex-Java-tester 
     
+    //Falta 
       
     @Override
     public String toString() {
