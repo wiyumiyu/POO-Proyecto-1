@@ -1,5 +1,6 @@
 package wiyu.barberia_poo;
 
+
 /*
 Proyecto 1 POO - Barbería
 Dayron Porras Perez
@@ -8,5 +9,4 @@ Mariana Torres Valverde
  */
 
 public class Barberia_POO {
-    
 }
