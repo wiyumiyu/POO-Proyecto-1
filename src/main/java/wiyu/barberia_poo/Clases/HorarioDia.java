@@ -5,18 +5,21 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author maria
+/*
+Proyecto 1 POO - Barbería
+Dayron Porras Perez
+Amanda Ramirez Viales
+Mariana Torres Valverde
  */
-public class HorarioBarberia {
+
+public class HorarioDia {
     
-    private String dia;
+     private String dia;
     private LocalTime inicio;
     private LocalTime fin;
     private Map<Integer, LocalTime> horasConCodigo;
     
-    public HorarioBarberia(String dia, LocalTime inicio, LocalTime fin) {
+    public HorarioDia(String dia, LocalTime inicio, LocalTime fin) {
         this.dia = dia;
         Duration duracion = Duration.between(inicio, fin);
         if (!tieneMinutos(duracion)) {
