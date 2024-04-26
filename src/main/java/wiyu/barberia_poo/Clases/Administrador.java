@@ -91,4 +91,10 @@ public class Administrador {
         citas.remove(cita);
         cliente.eliminarCita(codigoCita);
     }
+    public String consultarCita(int codigoCita) throws Exception{
+        Cita cita = obtenerCita(codigoCita);
+        if (cita == null)
+            throw new Exception("Cita no existente");
+        return cita.toString();
+    }
 }
