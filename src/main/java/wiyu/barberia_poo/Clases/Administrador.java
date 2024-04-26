@@ -27,6 +27,13 @@ public class Administrador {
         }
         return null;
     }
+    private Cita obtenerCita(int codigoCita){
+        for (Cita cita : citas){
+            if (cita.getCodigo() == codigoCita)
+                return cita;
+        }
+        return null;
+    }
     public int crearCliente(String nombre, String email, String telefono) throws Exception{
         if (!Cliente.correoEsValido(email))
             throw new Exception("Email inválido!");
@@ -54,5 +61,26 @@ public class Administrador {
         if (cliente == null)
             throw new Exception("Cliente no existente");
         clientes.remove(cliente);
+    }
+    public String consultarCliente(int codigoCliente) throws Exception{
+        Cliente cliente = obtenerCliente(codigoCliente);
+        if (cliente == null)
+            throw new Exception("Cliente no existente");
+        return cliente.toString();
+    }
+    public int crearCita(int codigoCliente, String dia, int hora, Servicio servicio) throws Exception{
+        Cliente cliente = obtenerCliente(codigoCliente);
+        if (cliente == null)
+            throw new Exception("Cliente no existente");
+        int numeroCita = cliente.crearCita(dia, hora, servicio);
+        Cita cita = cliente.obtenerCita(numeroCita);
+        citas.add(cita);
+        return cita.getCodigo();
+    }
+    public int modificarCita(int codigoCita, String dia, int hora, Servicio servicio) throws Exception{
+        Cita cita = obtenerCita(codigoCita);
+        if (cita == null)
+            throw new Exception("Cita no existente");
+        return cita.modificarCita(dia, hora, servicio);
     }
 }

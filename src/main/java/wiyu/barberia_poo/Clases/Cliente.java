@@ -93,7 +93,15 @@ public class Cliente {
         citas.add(cita);
         return cita.getCodigo();
     } 
-      
+    
+    public Cita obtenerCita(int codigoCita){
+        for (Cita cita : citas){
+            if (cita.getCodigo() == codigoCita)
+                return cita;
+        }
+        return null;
+    }
+    
     @Override
     public String toString() {
         String result =  "Código del cliente: " + codigo +"\n";

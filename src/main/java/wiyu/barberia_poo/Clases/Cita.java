@@ -24,6 +24,22 @@ public class Cita {
         consecutivo++;
     }
 
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
+    }
+
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public void setHoraInicial(int horaInicial) {
+        this.horaInicial = horaInicial;
+    }
+
+    public void setServicio(Servicio servicio) {
+        this.servicio = servicio;
+    }
+
     public Servicio getServicio() {
         return servicio;
     }
@@ -33,6 +49,12 @@ public class Cita {
     }
     public int getCodigo(){
         return codigo;
+    }
+    public int modificarCita(String dia, int hora, Servicio servicio) throws Exception{
+        this.setDia(dia);
+        this.setHoraInicial(hora);
+        this.setServicio(servicio);
+        return this.getCodigo();
     }
     @Override
     public String toString(){
