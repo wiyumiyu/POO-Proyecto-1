@@ -92,8 +92,7 @@ public class Cliente {
         Cita cita = new Cita(this.codigo, dia, hora, servicio);
         citas.add(cita);
         return cita.getCodigo();
-    }
-    //Falta 
+    } 
       
     @Override
     public String toString() {
