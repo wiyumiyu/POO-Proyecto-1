@@ -43,6 +43,10 @@ public class Cita {
     public Servicio getServicio() {
         return servicio;
     }
+
+    public int getCodigoCliente() {
+        return codigoCliente;
+    }
     
     public String getHorario(){
         return dia + horaInicial;

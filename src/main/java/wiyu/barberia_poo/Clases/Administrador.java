@@ -83,4 +83,12 @@ public class Administrador {
             throw new Exception("Cita no existente");
         return cita.modificarCita(dia, hora, servicio);
     }
+    public void borrarCita(int codigoCita) throws Exception{
+        Cita cita = obtenerCita(codigoCita);
+        if (cita == null)
+            throw new Exception("Cita no existente");
+        Cliente cliente = obtenerCliente(cita.getCodigoCliente());
+        citas.remove(cita);
+        cliente.eliminarCita(codigoCita);
+    }
 }

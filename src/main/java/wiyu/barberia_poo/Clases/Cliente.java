@@ -101,7 +101,12 @@ public class Cliente {
         }
         return null;
     }
-    
+    public void eliminarCita(int codigoCita){
+        for (Cita cita:citas){
+            if (cita.getCodigo() == codigoCita)
+                citas.remove(cita);
+        }
+    }
     @Override
     public String toString() {
         String result =  "Código del cliente: " + codigo +"\n";
