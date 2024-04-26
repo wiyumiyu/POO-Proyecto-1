@@ -1,5 +1,6 @@
 package wiyu.barberia_poo.Clases;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,7 @@ public class Cliente {
     private String nombre;
     private String telefono;
     private String correo;
+    private ArrayList<Cita> citas;
     
         
      public Cliente(String nombre, String telefono, String correo) {
@@ -86,6 +88,11 @@ public class Cliente {
         return matcher.matches();
     } // Phone number Regex | Phone number Regex Java Validator. (n.d.). https://www.akto.io/tools/phone-number-regex-Java-tester 
     
+    public int crearCita(String dia, int hora, Servicio servicio){
+        Cita cita = new Cita(this.codigo, dia, hora, servicio);
+        citas.add(cita);
+        return cita.getCodigo();
+    }
     //Falta 
       
     @Override
