@@ -14,7 +14,7 @@ Mariana Torres Valverde
 
 public class HorarioDia {
     
-     private String dia;
+    private String dia;
     private LocalTime inicio;
     private LocalTime fin;
     private Map<Integer, LocalTime> horasConCodigo;
