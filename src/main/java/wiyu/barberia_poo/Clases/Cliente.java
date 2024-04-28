@@ -73,14 +73,14 @@ public class Cliente {
     }
     
     
-    public static boolean correoEsValido(String email) {
+    private static boolean correoEsValido(String email) {
         // Patron para validar el email
         Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         Matcher mather = pattern.matcher(email);
         return mather.find();
     } // @author Somos Programadores Facebook // https://web.facebook.com/developers08062019 // https://www.youtube.com/watch?v=zaZH6Q8vT5k&t=3s
     
-    public static boolean numeroEsValido(String num) { 
+    private static boolean numeroEsValido(String num) { 
         // Expresión regular para números de teléfono de Costa Rica
         String regex = "^\\+506[0-9]\\d{8}$";
         Pattern pattern = Pattern.compile(regex);
@@ -88,11 +88,15 @@ public class Cliente {
         return matcher.matches();
     } // Phone number Regex | Phone number Regex Java Validator. (n.d.). https://www.akto.io/tools/phone-number-regex-Java-tester 
     
-    public int crearCita(String dia, int hora, Servicio servicio){
-        Cita cita = new Cita(this.codigo, dia, hora, servicio);
-        citas.add(cita);
-        return cita.getCodigo();
-    } 
+    public void modificarCliente(String nombre, String telefono, String correo) throws Exception{
+        if (!correoEsValido(correo))
+            throw new Exception("Email inválido!");
+        if (!numeroEsValido(telefono))
+            throw new Exception("Teléfono inválido!");
+        this.correo = correo;
+        this.telefono = telefono;
+        this.nombre = nombre;
+    }
     
     public Cita obtenerCita(int codigoCita){
         for (Cita cita : citas){
@@ -100,12 +104,6 @@ public class Cliente {
                 return cita;
         }
         return null;
-    }
-    public void eliminarCita(int codigoCita){
-        for (Cita cita:citas){
-            if (cita.getCodigo() == codigoCita)
-                citas.remove(cita);
-        }
     }
     @Override
     public String toString() {
