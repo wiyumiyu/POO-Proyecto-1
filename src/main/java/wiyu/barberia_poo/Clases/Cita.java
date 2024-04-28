@@ -1,5 +1,8 @@
 package wiyu.barberia_poo.Clases;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /*
 Proyecto 1 POO - Barbería
 Dayron Porras Perez
@@ -10,30 +13,44 @@ Mariana Torres Valverde
 public class Cita {
     public static int consecutivo = 1;
     private int codigo;
-    private String dia;
-    private int horaInicial;
+    private LocalDate dia;
+    private LocalTime horaInicial;
     private Servicio servicio;
-    private int codigoCliente;
+    private Cliente cliente;
+    private boolean confirmada;
 
-    public Cita(int codigoCliente, String dia, int horaInicial, Servicio servicio) {
+    public Cita(Cliente cliente, LocalDate dia, LocalTime horaInicial, Servicio servicio) {
         this.dia = dia;
-        this.codigoCliente = codigoCliente;
+        this.cliente = cliente;
         this.horaInicial = horaInicial;
         this.servicio = servicio;
         this.codigo = consecutivo;
+        this.confirmada = false;
         consecutivo++;
     }
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-
-    public void setDia(String dia) {
-        this.dia = dia;
+    
+    public int getCodigo(){
+        return codigo;
     }
 
-    public void setHoraInicial(int horaInicial) {
+    public void setDia(LocalDate dia) {
+        this.dia = dia;
+    }
+    
+    public LocalDate getDia() {
+        return dia;
+    }
+
+    public void setHoraInicial(LocalTime horaInicial) {
         this.horaInicial = horaInicial;
+    }
+    
+    public LocalTime getHoraInicial() {
+        return horaInicial;
     }
 
     public void setServicio(Servicio servicio) {
@@ -43,30 +60,42 @@ public class Cita {
     public Servicio getServicio() {
         return servicio;
     }
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
 
-    public int getCodigoCliente() {
-        return codigoCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     
     public String getHorario(){
-        return dia + horaInicial;
+        return this.dia.toString() + this.horaInicial;
     }
-    public int getCodigo(){
-        return codigo;
+    
+    public boolean getConfirmada() {
+        return confirmada;
     }
-    public int modificarCita(String dia, int hora, Servicio servicio) throws Exception{
-        this.setDia(dia);
-        this.setHoraInicial(hora);
-        this.setServicio(servicio);
-        return this.getCodigo();
+
+    public void setConfirmada(boolean confirmada) {
+        this.confirmada = confirmada;
     }
+    
+    public int modificarCita(LocalDate dia, LocalTime hora, Servicio servicio) {
+        this.dia = dia;
+        this.horaInicial =hora;
+        this.servicio = servicio;
+        return this.codigo;
+    }
+    
     @Override
     public String toString(){
-        String datos = "Código de cita: " + codigo + "\n";
-        datos += "Código del cliente: " + codigoCliente + "\n";
-        datos += "Servicio de cita: " + servicio.toString() + "\n";
-        datos += "Día de cita: " + dia + "\n";
-        datos += "Hora inicial de la cita: " + horaInicial + "\n";
+        String datos = "Código de cita: " + this.codigo + "\n";
+        datos += "Código del cliente: " + this.getCliente().getCodigo() + "\n";
+        datos += "Servicio de cita: " + this.servicio.toString() + "\n";
+        datos += "Día de cita: " + this.dia + "\n";
+        datos += "Hora inicial de la cita: " + this.horaInicial + "\n";
         return datos;
     }
+
 }
