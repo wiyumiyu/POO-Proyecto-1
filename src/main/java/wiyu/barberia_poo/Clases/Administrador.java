@@ -18,6 +18,12 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
+/*
+Controlador de la Barbería
+Contiene ArrayList con diferentes tipos de datos
+para almacenar y controlar los datos
+*/
+
 public class Administrador {
     ArrayList<Cliente> clientes;
     ArrayList<Cita> citas;
@@ -25,6 +31,10 @@ public class Administrador {
     ArrayList<Cliente> listaDeEspera;
     ArrayList<HorarioDia> listaHorariosDia;
     
+    /*
+    Inicializa las lista y carga datos de los clientes,
+    citas, servicios, lista de espera y horario de atención.
+    */
     public Administrador(){
         this.clientes = new ArrayList();
         this.citas = new ArrayList();
@@ -39,13 +49,21 @@ public class Administrador {
         cargarDatosListaEspera();
 
     }
+    
+    /*
+    Metodo que obtiene un cliente y recibe un parametro.
+    */
     private Cliente obtenerCliente(int codigoCliente){
-        for (Cliente cliente : clientes){
-            if (cliente.getCodigo() == codigoCliente)
+        for (Cliente cliente : clientes){ //recorre la lista
+            if (cliente.getCodigo() == codigoCliente) //compara el codigo
                 return cliente;
         }
         return null;
     }
+    
+    /*
+    Metodo que obtiene una cita y recibe un parametro entero.
+    */  
     private Cita obtenerCita(int codigoCita){
         for (Cita cita : citas){
             if (cita.getCodigo() == codigoCita)
@@ -53,6 +71,10 @@ public class Administrador {
         }
         return null;
     }
+    
+     /*
+    Metodo que obtiene un Servicio y recibe un parametro entero.
+    */  
     private Servicio obtenerServicio(int codigoServicio){
         for (Servicio servicio : servicios){
             if (servicio.getCodigo() == codigoServicio)
@@ -61,16 +83,25 @@ public class Administrador {
         return null;
     }
     
+    /*
+    Metodo reasigna el valor del consecutivo de la clase cliente
+    */
     private void reasignarConsecutivoCliente() {
-        int mayor = 0;
-        for (Cliente cliente : clientes) {
-            if (cliente != null && cliente.getCodigo()> mayor) {
+        int mayor = 0; // inicia en un numero mayor a 0
+        for (Cliente cliente : clientes) { // recorre lista
+            if (cliente != null && cliente.getCodigo()> mayor) { // verifica si no es nulo y es mayor al valor actual
                 mayor = cliente.getCodigo();
             }
         }
-        Cliente.consecutivo = mayor + 1;
+        Cliente.consecutivo = mayor + 1; //reasigna el consecutivo en clase cliente
     }
     
+    /*
+    Metodo reasigna el valor del consecutivo de la clase Servicio
+    Busca el código más alto la lista y reasignan el valor consecutivo para tener 
+    un nuevo código único. 
+    
+    */
     private void reasignarConsecutivoServicio() {
         int mayor = 0;
         for (Servicio servicio : servicios) {
@@ -78,9 +109,12 @@ public class Administrador {
                 mayor = servicio.getCodigo();
             }
         }
-        Servicio.consecutivo = mayor + 1;
+        Servicio.consecutivo = mayor + 1; //reasigna el consecutivo en clase servicio
     }
     
+    /*
+    Metodo reasigna el valor del consecutivo de la clase Cita
+    */
     private void reasignarConsecutivoCita() {
         int mayor = 0;
         for (Cita cita : citas) {
@@ -88,41 +122,59 @@ public class Administrador {
                 mayor = cita.getCodigo();
             }
         }
-        Cita.consecutivo = mayor + 1;
+        Cita.consecutivo = mayor + 1; //reasigna el consecutivo en clase cita
     }
     
-    
-    public int crearCliente(String nombre, String email, String telefono) throws Exception{
+    /*
+    Crea un nuevo Cliente 
+    */
+        public int crearCliente(String nombre, String email, String telefono) throws Exception{
         //verifica que el cliente no exista en el sistema
-        for (Cliente cliente : clientes){
+        for (Cliente cliente : clientes){ //recorre la lista
             if (cliente.getNombre().equals(nombre) && cliente.getCorreo().equals(email) && cliente.getTelefono().equals(telefono))
-                throw new Exception("El cliente ya se encuentra registrado");
-        }
+                throw new Exception("El cliente ya se encuentra registrado"); // si encuentra un cliente igual manda una una excepcion
+                    }
         
-        //Registra el cliente
+        //Crea y Guarda el nuevo cliente con los datos
         Cliente cliente = new Cliente(nombre, telefono, email);
-        clientes.add(cliente);
-        guardarDatoCliente();
+        clientes.add(cliente); //agrega el cliente a la lista de clientes
+        guardarDatoCliente(); //guarda la informacion del nuevo cliente al archivo txt
         return cliente.getCodigo();
     }
+        
+    /*
+    Método permite modificar un cliente Ya existente
+    */
     public void modificarCliente(int codigoCliente, String nombre, String telefono, String correo) throws Exception{
-        Cliente cliente = obtenerCliente(codigoCliente);
-        cliente.modificarCliente(nombre, telefono, correo);
-        guardarDatoCliente();
+        Cliente cliente = obtenerCliente(codigoCliente); // busca un cliente por el código cliente ya ingresado
+        cliente.modificarCliente(nombre, telefono, correo); //actualiza los datos cliente con los nuevos datos (numero, telefono, correo)
+        guardarDatoCliente(); //guarda los cambios
     }
+    
+    /*
+    Método que borra un cliente Ya existente
+    */
     public void borrarCliente(int codigoCliente) throws Exception{
-        Cliente cliente = obtenerCliente(codigoCliente);
+        Cliente cliente = obtenerCliente(codigoCliente); //entra en ObtenerCliente para buscar un cliente por su codigo
         if (cliente == null)
-            throw new Exception("Cliente no existente");
-        clientes.remove(cliente);
-        guardarDatoCliente();
+            throw new Exception("Cliente no existente"); //Lanza excepción si un cliente no existe
+        clientes.remove(cliente); //Elimina el cliente en la lista de clientes
+        guardarDatoCliente(); //actualiza la lista de clientes
     }
+
+    /*
+    Método que Busca un cliente Ya existente
+    */
     public String consultarCliente(int codigoCliente) throws Exception{
         Cliente cliente = obtenerCliente(codigoCliente);
         if (cliente == null)
             throw new Exception("Cliente no existente");
         return cliente.toString();
     }
+
+    /*
+    Método  un cliente Ya existente
+    */    
     private HorarioDia obtenerHorario(DayOfWeek dia, LocalTime hora){ 
         for (HorarioDia horario : listaHorariosDia){
             if (horario.getDia().equals(dia)){
