@@ -203,7 +203,7 @@ public class Administrador {
     }
     
     public void establecerHorarioAtencion(DayOfWeek dia, LocalTime inicio, LocalTime fin) throws Exception{
-        //Registra el tipo de servicio
+        //Registra el horario de atencion
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
     }
