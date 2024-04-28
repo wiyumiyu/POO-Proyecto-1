@@ -1,5 +1,6 @@
 package wiyu.barberia_poo.Clases;
 
+import java.time.DayOfWeek; // https://www.baeldung.com/java-get-day-of-week
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -14,12 +15,12 @@ Mariana Torres Valverde
 
 public class HorarioDia {
     
-    private String dia;
+    private DayOfWeek dia;
     private LocalTime inicio;
     private LocalTime fin;
     private Map<Integer, LocalTime> horasConCodigo;
     
-    public HorarioDia(String dia, LocalTime inicio, LocalTime fin) {
+    public HorarioDia(DayOfWeek dia, LocalTime inicio, LocalTime fin) {
         this.dia = dia;
         Duration duracion = Duration.between(inicio, fin);
         if (!tieneMinutos(duracion)) {
@@ -31,13 +32,45 @@ public class HorarioDia {
         this.horasConCodigo = generarMapaHorasConCodigo(inicio, fin);          
     }
     
+    public DayOfWeek getDia() {
+        return dia;
+    }
+
+    public void setDia(DayOfWeek dia) {
+        this.dia = dia;
+    }
+
+    public LocalTime getInicio() {
+        return inicio;
+    }
+
+    public void setInicio(LocalTime inicio) {
+        this.inicio = inicio;
+    }
+
+    public LocalTime getFin() {
+        return fin;
+    }
+
+    public void setFin(LocalTime fin) {
+        this.fin = fin;
+    }
+
+    public Map<Integer, LocalTime> getHorasConCodigo() {
+        return horasConCodigo;
+    }
+
+    public void setHorasConCodigo(Map<Integer, LocalTime> horasConCodigo) {
+        this.horasConCodigo = horasConCodigo;
+    }
+    
     // Ejemplo para usar la funcion de obtener los procedimientos
     
 //    LocalTime horaInicio = LocalTime.of(8, 30); // Por ejemplo, 8:00 AM
 //    LocalTime horaFin = LocalTime.of(18, 30); // Por ejemplo, 6:00 PM
 //    generarMapaHorasConCodigo(horaInicio, horaFin); 
     
-    public static Map<Integer, LocalTime> generarMapaHorasConCodigo(LocalTime inicio, LocalTime fin) {
+    private static Map<Integer, LocalTime> generarMapaHorasConCodigo(LocalTime inicio, LocalTime fin) {
 
         Map<Integer, LocalTime> horasConCodigo = new HashMap<>();
         LocalTime horaActual = inicio;
@@ -66,9 +99,9 @@ public class HorarioDia {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Horario para ").append(dia).append(": de ").append(inicio).append(" a ").append(fin).append("\n");
+        sb.append("Horario para ").append(getDia()).append(": de ").append(getInicio()).append(" a ").append(getFin()).append("\n");
         sb.append("Horarios del día:\n");
-        for (Map.Entry<Integer, LocalTime> entry : horasConCodigo.entrySet()) {
+        for (Map.Entry<Integer, LocalTime> entry : getHorasConCodigo().entrySet()) {
             sb.append("Código: ").append(entry.getKey()).append(", Hora: ").append(entry.getValue()).append("\n");
         }
         return sb.toString();
