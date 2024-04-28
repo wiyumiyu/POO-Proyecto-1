@@ -1,5 +1,11 @@
 package wiyu.barberia_poo.Clases;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,11 +19,11 @@ Mariana Torres Valverde
  */
 
 public class Administrador {
-    final ArrayList<Cliente> clientes;
-    final ArrayList<Cita> citas;
-    final ArrayList<Servicio> servicios;
-    final ArrayList<Cliente> listaDeEspera;
-    final ArrayList<HorarioDia> listaHorariosDia;
+    ArrayList<Cliente> clientes;
+    ArrayList<Cita> citas;
+    ArrayList<Servicio> servicios;
+    ArrayList<Cliente> listaDeEspera;
+    ArrayList<HorarioDia> listaHorariosDia;
     
     public Administrador(){
         this.clientes = new ArrayList();
@@ -25,6 +31,12 @@ public class Administrador {
         this.servicios = new ArrayList();
         this.listaDeEspera = new ArrayList();        
         this.listaHorariosDia = new ArrayList();
+        
+        cargarDatosCliente();
+        cargarDatosCita();
+        cargarDatosServicio();
+        cargarDatosHorario();
+        cargarDatosListaEspera();
 
     }
     private Cliente obtenerCliente(int codigoCliente){
@@ -48,6 +60,38 @@ public class Administrador {
         }
         return null;
     }
+    
+    private void reasignarConsecutivoCliente() {
+        int mayor = 0;
+        for (Cliente cliente : clientes) {
+            if (cliente != null && cliente.getCodigo()> mayor) {
+                mayor = cliente.getCodigo();
+            }
+        }
+        Cliente.consecutivo = mayor + 1;
+    }
+    
+    private void reasignarConsecutivoServicio() {
+        int mayor = 0;
+        for (Servicio servicio : servicios) {
+            if (servicio != null && servicio.getCodigo()> mayor) {
+                mayor = servicio.getCodigo();
+            }
+        }
+        Servicio.consecutivo = mayor + 1;
+    }
+    
+    private void reasignarConsecutivoCita() {
+        int mayor = 0;
+        for (Cita cita : citas) {
+            if (cita != null && cita.getCodigo()> mayor) {
+                mayor = cita.getCodigo();
+            }
+        }
+        Cita.consecutivo = mayor + 1;
+    }
+    
+    
     public int crearCliente(String nombre, String email, String telefono) throws Exception{
         //verifica que el cliente no exista en el sistema
         for (Cliente cliente : clientes){
@@ -58,17 +102,20 @@ public class Administrador {
         //Registra el cliente
         Cliente cliente = new Cliente(nombre, telefono, email);
         clientes.add(cliente);
+        guardarDatoCliente();
         return cliente.getCodigo();
     }
     public void modificarCliente(int codigoCliente, String nombre, String telefono, String correo) throws Exception{
         Cliente cliente = obtenerCliente(codigoCliente);
         cliente.modificarCliente(nombre, telefono, correo);
+        guardarDatoCliente();
     }
     public void borrarCliente(int codigoCliente) throws Exception{
         Cliente cliente = obtenerCliente(codigoCliente);
         if (cliente == null)
             throw new Exception("Cliente no existente");
         clientes.remove(cliente);
+        guardarDatoCliente();
     }
     public String consultarCliente(int codigoCliente) throws Exception{
         Cliente cliente = obtenerCliente(codigoCliente);
@@ -106,6 +153,7 @@ public class Administrador {
             throw new Exception("Cliente no existente");
         Cita cita = new Cita(cliente, dia, hora, obtenerServicio(codigoServicio));        
         citas.add(cita);
+        guardarDatoCita();
         return cita.getCodigo();
     }
     public void modificarCita(int codigoCita, LocalDate dia, LocalTime hora, Servicio servicio) throws Exception{
@@ -123,12 +171,14 @@ public class Administrador {
         if (cita == null)
             throw new Exception("Cita no existente");
         cita.modificarCita(dia, hora, servicio);
+        guardarDatoCita();
     }
     public void borrarCita(int codigoCita) throws Exception{
         Cita cita = obtenerCita(codigoCita);
         if (cita == null)
             throw new Exception("Cita no existente");
         citas.remove(cita);
+        guardarDatoCita();
     }
     public String consultarCita(int codigoCita) throws Exception{
         Cita cita = obtenerCita(codigoCita);
@@ -142,12 +192,14 @@ public class Administrador {
         if (cita == null)
             throw new Exception("Cita no existente");
         cita.setConfirmada(true);
+        guardarDatoCita();
     }
     
     public int crearTipoServicio(String tipo, String descripcion) throws Exception{
         //Registra el tipo de servicio
         Servicio servicio = new Servicio(tipo, descripcion);
         servicios.add(servicio);
+        guardarDatoServicio();
         return servicio.getCodigo();
     }
     
@@ -156,6 +208,7 @@ public class Administrador {
         if (servicio == null)
             throw new Exception("Servicio no existente");
         servicio.modificarServicio(tipo, descripcion);
+        guardarDatoServicio();
     }
     
     public void borrarTipoServicio(int codigoServicio) throws Exception{
@@ -163,6 +216,7 @@ public class Administrador {
         if (servicio == null)
             throw new Exception("Servicio no existente");
         servicios.remove(servicio);
+        guardarDatoServicio();
     }
     
     public String consultarTipoServicio(int codigoServicio) throws Exception{
@@ -186,6 +240,7 @@ public class Administrador {
         if (cliente == null)
             throw new Exception("Cliente no existente");
         listaDeEspera.add(cliente);
+        guardarDatoListaEspera();
     }
     
     public void borrarClienteListaEspera(int codigoCliente) throws Exception{
@@ -200,11 +255,201 @@ public class Administrador {
         if (cliente == null)
             throw new Exception("Cliente no existente");
         listaDeEspera.remove(cliente);
+        guardarDatoListaEspera();
     }
     
     public void establecerHorarioAtencion(DayOfWeek dia, LocalTime inicio, LocalTime fin) throws Exception{
         //Registra el horario de atencion
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
+        guardarDatoHorario();
+    }
+    
+    public void guardarDatoCliente() {
+        try{
+            FileOutputStream file = new FileOutputStream("BarberiaClientes.bin");
+            ObjectOutputStream stream = new ObjectOutputStream(file);
+            stream.writeObject(clientes);
+            stream.close();
+            file.close();
+        }
+        catch (Exception e){
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void guardarDatoServicio() {
+        try{
+            FileOutputStream file = new FileOutputStream("BarberiaServicios.bin");
+            ObjectOutputStream stream = new ObjectOutputStream(file);
+            stream.writeObject(servicios);
+            stream.close();
+            file.close();
+        }
+        catch (Exception e){
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void guardarDatoCita() {
+        try{
+            FileOutputStream file = new FileOutputStream("BarberiaCita.bin");
+            ObjectOutputStream stream = new ObjectOutputStream(file);
+            stream.writeObject(citas);
+            stream.close();
+            file.close();
+        }
+        catch (Exception e){
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void guardarDatoListaEspera() {
+        try{
+            FileOutputStream file = new FileOutputStream("BarberiaListaEspera.bin");
+            ObjectOutputStream stream = new ObjectOutputStream(file);
+            stream.writeObject(listaDeEspera);
+            stream.close();
+            file.close();
+        }
+        catch (Exception e){
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void guardarDatoHorario() {
+        try{
+            FileOutputStream file = new FileOutputStream("BarberiaHorario.bin");
+            ObjectOutputStream stream = new ObjectOutputStream(file);
+            stream.writeObject(listaHorariosDia);
+            stream.close();
+            file.close();
+        }
+        catch (Exception e){
+            System.err.println("Error al escribir el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDatosCliente() {
+        try{
+            File archivo = new File("BarberiaClientes.bin");
+
+            // Verificar si el archivo existe
+            if (!archivo.exists()) {
+                // Si no existe, crear uno nuevo
+                archivo.createNewFile();
+            }
+        
+            // Si el archivo existe, cargar datos desde él
+            try (FileInputStream file = new FileInputStream(archivo);
+                 ObjectInputStream stream = new ObjectInputStream(file)) {
+                clientes = (ArrayList<Cliente>) stream.readObject();
+                reasignarConsecutivoCliente(); 
+            } catch (IOException e) {
+                // Manejar excepciones de lectura
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            // Manejar excepciones de lectura
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDatosServicio() {
+        try{
+            File archivo = new File("BarberiaServicios.bin");
+
+            // Verificar si el archivo existe
+            if (!archivo.exists()) {
+                // Si no existe, crear uno nuevo
+                archivo.createNewFile();
+            }
+        
+            // Si el archivo existe, cargar datos desde él
+            try (FileInputStream file = new FileInputStream(archivo);
+                 ObjectInputStream stream = new ObjectInputStream(file)) {
+                servicios = (ArrayList<Servicio>) stream.readObject();
+                reasignarConsecutivoServicio(); 
+            } catch (IOException e) {
+                // Manejar excepciones de lectura
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            // Manejar excepciones de lectura
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDatosCita() {
+        try{
+            File archivo = new File("BarberiaCita.bin");
+
+            // Verificar si el archivo existe
+            if (!archivo.exists()) {
+                // Si no existe, crear uno nuevo
+                archivo.createNewFile();
+            }
+        
+            // Si el archivo existe, cargar datos desde él
+            try (FileInputStream file = new FileInputStream(archivo);
+                 ObjectInputStream stream = new ObjectInputStream(file)) {
+                citas = (ArrayList<Cita>) stream.readObject();
+                reasignarConsecutivoCita(); 
+            } catch (IOException e) {
+                // Manejar excepciones de lectura
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            // Manejar excepciones de lectura
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDatosListaEspera() {
+        try{
+            File archivo = new File("BarberiaListaEspera.bin");
+
+            // Verificar si el archivo existe
+            if (!archivo.exists()) {
+                // Si no existe, crear uno nuevo
+                archivo.createNewFile();
+            }
+        
+            // Si el archivo existe, cargar datos desde él
+            try (FileInputStream file = new FileInputStream(archivo);
+                 ObjectInputStream stream = new ObjectInputStream(file)) {
+                listaDeEspera = (ArrayList<Cliente>) stream.readObject();
+            } catch (IOException e) {
+                // Manejar excepciones de lectura
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            // Manejar excepciones de lectura
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
+    }
+    
+    public void cargarDatosHorario() {
+        try{
+            File archivo = new File("BarberiaHorario.bin");
+
+            // Verificar si el archivo existe
+            if (!archivo.exists()) {
+                // Si no existe, crear uno nuevo
+                archivo.createNewFile();
+            }
+        
+            // Si el archivo existe, cargar datos desde él
+            try (FileInputStream file = new FileInputStream(archivo);
+                 ObjectInputStream stream = new ObjectInputStream(file)) {
+                listaHorariosDia = (ArrayList<HorarioDia>) stream.readObject();
+            } catch (IOException e) {
+                // Manejar excepciones de lectura
+                System.err.println("Error al leer el archivo: " + e.getMessage());
+            }
+        } catch (Exception e) {
+            // Manejar excepciones de lectura
+            System.err.println("Error al leer el archivo: " + e.getMessage());
+        }
     }
 }
