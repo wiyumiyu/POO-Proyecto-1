@@ -168,29 +168,31 @@ public class Administrador {
     Método que Busca un cliente Ya existente
     */
     public String consultarCliente(int codigoCliente) throws Exception{
-        Cliente cliente = obtenerCliente(codigoCliente);
-        if (cliente == null)
+        Cliente cliente = obtenerCliente(codigoCliente); // llama a Obtenercliente y obtiene el codigo cliente
+        if (cliente == null) // verifica que el cliente exista
             throw new Exception("Cliente no existente");
         return cliente.toString();
     }
 
     /*
-    Método  un cliente Ya existente
+    Método para obtener el Horario 
     */    
     private HorarioDia obtenerHorario(DayOfWeek dia, LocalTime hora){ 
-        for (HorarioDia horario : listaHorariosDia){
-            if (horario.getDia().equals(dia)){
-                if(hora.getHour() >= horario.getInicio().getHour() && hora.getHour() < horario.getFin().getHour()){
-                    return horario;
+        for (HorarioDia horario : listaHorariosDia){ // recorre la lista
+            if (horario.getDia().equals(dia)){ //compara el día de la semana actual con el día de la semana proporcionado 
+                if(hora.getHour() >= horario.getInicio().getHour() && hora.getHour() < horario.getFin().getHour()){ // compara la hora proporcionada con la hora de inicio y la hora de fin del objeto HorarioDia actual.
+                    return horario; //devuelve el objeto HorarioDia actual y ve que se ha encontrado una coincidencia/choque
                 }
             }
         }
         return null;
     }
-    
+       /*
+    Método para crear una Cita 
+    */  
     public int crearCita(int codigoCliente, LocalDate dia, LocalTime hora, int codigoServicio) throws Exception{
         //validar que el dia y la hora este dentro del horario de atencion
-        //https://www.baeldung.com/java-get-day-of-week
+        //Author Baeldung https://www.baeldung.com/java-get-day-of-week
         //getDayOfWeek obtiene el dia de la semana para verificar si ese dia es parte 
         //del horario disponible
         HorarioDia horario = obtenerHorario(dia.getDayOfWeek(), hora); 
@@ -210,6 +212,10 @@ public class Administrador {
         guardarDatoCita();
         return cita.getCodigo();
     }
+    
+        /*
+    Método para modificar una Cita
+    */ 
     public void modificarCita(int codigoCita, LocalDate dia, LocalTime hora, Servicio servicio) throws Exception{
         //validar que el dia y la hora este dentro del horario de atencion
         HorarioDia horario = obtenerHorario(dia.getDayOfWeek(), hora); 
@@ -227,6 +233,9 @@ public class Administrador {
         cita.modificarCita(dia, hora, servicio);
         guardarDatoCita();
     }
+        /*
+    Método para Borrar una cita 
+    */ 
     public void borrarCita(int codigoCita) throws Exception{
         Cita cita = obtenerCita(codigoCita);
         if (cita == null)
@@ -234,13 +243,19 @@ public class Administrador {
         citas.remove(cita);
         guardarDatoCita();
     }
+    
+    /*
+    Método para Cosultar un cita
+    */ 
     public String consultarCita(int codigoCita) throws Exception{
         Cita cita = obtenerCita(codigoCita);
         if (cita == null)
             throw new Exception("Cita no existente");
         return cita.toString();
     }
-    
+     /*
+    Método para Confirmar una cita
+    */
     public void confirmarCita(int codigoCita) throws Exception{
         Cita cita = obtenerCita(codigoCita);
         if (cita == null)
@@ -365,7 +380,9 @@ public class Administrador {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Guardar datos de lista de Espera
+    */      
     public void guardarDatoListaEspera() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaListaEspera.bin");
@@ -378,7 +395,9 @@ public class Administrador {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Guardar datos de Horario
+    */        
     public void guardarDatoHorario() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaHorario.bin");
@@ -391,7 +410,9 @@ public class Administrador {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Cargar datos de Cliente
+    */        
     public void cargarDatosCliente() {
         try{
             File archivo = new File("BarberiaClientes.bin");
@@ -416,7 +437,9 @@ public class Administrador {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Cargar datos de Servicio
+    */        
     public void cargarDatosServicio() {
         try{
             File archivo = new File("BarberiaServicios.bin");
@@ -441,7 +464,9 @@ public class Administrador {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Cargar datos de cita
+    */        
     public void cargarDatosCita() {
         try{
             File archivo = new File("BarberiaCita.bin");
@@ -466,7 +491,9 @@ public class Administrador {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Cargar datos de Lista de Espera
+    */        
     public void cargarDatosListaEspera() {
         try{
             File archivo = new File("BarberiaListaEspera.bin");
@@ -490,7 +517,9 @@ public class Administrador {
             System.err.println("Error al leer el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Cargar datos de Horario
+    */    
     public void cargarDatosHorario() {
         try{
             File archivo = new File("BarberiaHorario.bin");
