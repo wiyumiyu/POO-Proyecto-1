@@ -1,5 +1,6 @@
 package wiyu.barberia_poo.Clases;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -11,7 +12,7 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
-public class Cliente {
+public class Cliente{
     
     public static int consecutivo = 1;
     private int codigo;
@@ -82,7 +83,7 @@ public class Cliente {
     
     private static boolean numeroEsValido(String num) { 
         // Expresión regular para números de teléfono de Costa Rica
-        String regex = "^\\+506[0-9]\\d{8}$";
+        String regex = "^\\(\\d{3}\\)\\d{4}\\d{4}$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(num);
         return matcher.matches();

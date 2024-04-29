@@ -94,6 +94,8 @@ public class ClientesPanel extends javax.swing.JPanel {
         LabelAgregar.setForeground(new java.awt.Color(255, 255, 255));
         LabelAgregar.setText("AGREGAR CLIENTE");
         jPanel1.add(LabelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+
+        entryTelefono.setText("(506)");
         jPanel1.add(entryTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 180, -1));
         jPanel1.add(entryEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 210, -1));
         jPanel1.add(entryNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 190, -1));
@@ -128,6 +130,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         LabelCambiarDatos.setForeground(new java.awt.Color(255, 255, 255));
         LabelCambiarDatos.setText("INGRESE LOS NUEVOS DATOS DEL CLIENTE");
         jPanel1.add(LabelCambiarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+        LabelCambiarDatos.setVisible(false);
 
         LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Clients.png"))); // NOI18N
         LabelFondo.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -188,7 +191,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         }
         entryNombre.setText("");
         entryEmail.setText("");
-        entryTelefono.setText("");
+        entryTelefono.setText("(506)");
     }//GEN-LAST:event_BotonAgregarActionPerformed
     //Pone visibles los elementos necesarios para hacer modificaciones
     private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
@@ -222,7 +225,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         }
         entryNombre.setText("");
         entryEmail.setText("");
-        entryTelefono.setText("");
+        entryTelefono.setText("(506)");
     }//GEN-LAST:event_BotonConfirmarModificacionActionPerformed
     //Cancela la modificacion y vuelve todo como al estado inicial
     private void BotonCancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarModificacionActionPerformed
@@ -233,7 +236,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         BotonAgregar.setVisible(true);
         entryNombre.setText("");
         entryEmail.setText("");
-        entryTelefono.setText("");
+        entryTelefono.setText("(506)");
     }//GEN-LAST:event_BotonCancelarModificacionActionPerformed
 
 
