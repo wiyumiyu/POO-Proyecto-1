@@ -4,12 +4,18 @@
  */
 package wiyu.barberia_poo.interfaz;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import wiyu.barberia_poo.Clases.Administrador;
+
 /**
  *
  * @author maria
  */
 public class ClientesPanel extends javax.swing.JPanel {
-
+    private Administrador admin = new Administrador();
     /**
      * Creates new form ClientesPanel
      */
@@ -27,24 +33,109 @@ public class ClientesPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        BotonEliminar = new javax.swing.JButton();
+        BotonModificar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListaClientes = new javax.swing.JList<>();
+        LabelNombre = new javax.swing.JLabel();
+        LabelEmail = new javax.swing.JLabel();
+        LabelTelefono = new javax.swing.JLabel();
+        LabelAgregar = new javax.swing.JLabel();
+        entryTelefono = new javax.swing.JTextField();
+        entryEmail = new javax.swing.JTextField();
+        entryNombre = new javax.swing.JTextField();
+        BotonAgregar = new javax.swing.JButton();
+        BotonConfirmarModificacion = new javax.swing.JButton();
+        BotonCancelarModificacion = new javax.swing.JButton();
+        LabelCambiarDatos = new javax.swing.JLabel();
+        LabelFondo = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(671, 480));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Clients.png"))); // NOI18N
+        BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, 90, 30));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        BotonModificar.setText("Modificar");
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 90, 30));
+
+        jScrollPane1.setViewportView(ListaClientes);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 180));
+
+        LabelNombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelNombre.setForeground(new java.awt.Color(255, 255, 255));
+        LabelNombre.setText("Nombre");
+        jPanel1.add(LabelNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 360, -1, -1));
+
+        LabelEmail.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelEmail.setForeground(new java.awt.Color(255, 255, 255));
+        LabelEmail.setText("Email");
+        jPanel1.add(LabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 360, -1, -1));
+
+        LabelTelefono.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        LabelTelefono.setText("Telefono");
+        jPanel1.add(LabelTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 360, -1, -1));
+
+        LabelAgregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        LabelAgregar.setText("AGREGAR CLIENTE");
+        jPanel1.add(LabelAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 320, -1, -1));
+        jPanel1.add(entryTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 400, 180, -1));
+        jPanel1.add(entryEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 210, -1));
+        jPanel1.add(entryNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 400, 190, -1));
+
+        BotonAgregar.setText("Agregar");
+        BotonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 440, 90, 30));
+
+        BotonConfirmarModificacion.setText("Confirmar");
+        BotonConfirmarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConfirmarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonConfirmarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 440, 90, 30));
+        BotonConfirmarModificacion.setVisible(false);
+
+        BotonCancelarModificacion.setText("Cancelar");
+        BotonCancelarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonCancelarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, 90, 30));
+        BotonCancelarModificacion.setVisible(false);
+
+        LabelCambiarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelCambiarDatos.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCambiarDatos.setText("INGRESE LOS NUEVOS DATOS DEL CLIENTE");
+        jPanel1.add(LabelCambiarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 320, -1, -1));
+
+        LabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Clients.png"))); // NOI18N
+        LabelFondo.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                LabelFondoFocusGained(evt);
+            }
+        });
+        jPanel1.add(LabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,9 +149,111 @@ public class ClientesPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void LabelFondoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LabelFondoFocusGained
+        DefaultListModel<Entry<Integer, String>> lista = new DefaultListModel();
+        Map<Integer, String> clientes = admin.getClientes();
+        for (Entry <Integer, String> cliente: clientes.entrySet()){
+            lista.addElement(cliente);
+        }
+        ListaClientes.setModel(lista);
+    }//GEN-LAST:event_LabelFondoFocusGained
+    //Elimina un cliente pero primero solicita una confirmacion
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        if (ListaClientes.getSelectedIndex() != -1){
+            Entry<Integer, String> cliente = ListaClientes.getSelectedValue();
+            int codigoCliente = cliente.getKey();
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente de forma permanente?", "Eliminar cliente", JOptionPane.QUESTION_MESSAGE);
+            if (eliminar == JOptionPane.YES_OPTION){
+                try{
+                    admin.borrarCliente(codigoCliente);
+                    JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ningún cliente ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_BotonEliminarActionPerformed
+    //Pide los elementos necesarios para agregar un nuevo cliente
+    private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+        try{
+            String nombre = entryNombre.getText();
+            String email = entryEmail.getText();
+            String telefono = entryTelefono.getText();
+            admin.crearCliente(nombre, email, telefono);
+            JOptionPane.showMessageDialog(null, "Cliente creado con éxito", "CREACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        entryNombre.setText("");
+        entryEmail.setText("");
+        entryTelefono.setText("");
+    }//GEN-LAST:event_BotonAgregarActionPerformed
+    //Pone visibles los elementos necesarios para hacer modificaciones
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+        LabelAgregar.setVisible(false);
+        LabelCambiarDatos.setVisible(true);
+        BotonConfirmarModificacion.setVisible(true);
+        BotonCancelarModificacion.setVisible(true);
+        BotonAgregar.setVisible(false);
+    }//GEN-LAST:event_BotonModificarActionPerformed
+    //Confirma la modificacion del cliente, lo modifica y vuelve todo como al estado inicial
+    private void BotonConfirmarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarModificacionActionPerformed
+        LabelAgregar.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        try{
+            if (ListaClientes.getSelectedIndex() != -1){
+                Entry<Integer, String> cliente = ListaClientes.getSelectedValue();
+                int codigoCliente = cliente.getKey();
+                String nombre = entryNombre.getText();
+                String email = entryEmail.getText();
+                String telefono = entryTelefono.getText();
+                admin.modificarCliente(codigoCliente, nombre, telefono, email);
+                JOptionPane.showMessageDialog(null, "Cliente modificado con éxito", "MODIFICACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ningún cliente ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+            }    
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        entryNombre.setText("");
+        entryEmail.setText("");
+        entryTelefono.setText("");
+    }//GEN-LAST:event_BotonConfirmarModificacionActionPerformed
+    //Cancela la modificacion y vuelve todo como al estado inicial
+    private void BotonCancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarModificacionActionPerformed
+        LabelAgregar.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        entryNombre.setText("");
+        entryEmail.setText("");
+        entryTelefono.setText("");
+    }//GEN-LAST:event_BotonCancelarModificacionActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonCancelarModificacion;
+    private javax.swing.JButton BotonConfirmarModificacion;
+    private javax.swing.JButton BotonEliminar;
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JLabel LabelAgregar;
+    private javax.swing.JLabel LabelCambiarDatos;
+    private javax.swing.JLabel LabelEmail;
+    private javax.swing.JLabel LabelFondo;
+    private javax.swing.JLabel LabelNombre;
+    private javax.swing.JLabel LabelTelefono;
+    private javax.swing.JList<Entry<Integer, String>> ListaClientes;
+    private javax.swing.JTextField entryEmail;
+    private javax.swing.JTextField entryNombre;
+    private javax.swing.JTextField entryTelefono;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,6 +10,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 /*
 Proyecto 1 POO - Barbería
@@ -315,6 +317,14 @@ public class Administrador {
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
         guardarDatoHorario();
+    }
+    
+    //Funcion que retorna un Map de clientes con relación Codigo-String
+    public Map<Integer, String> getClientes(){
+        Map<Integer, String> mapClientes = new TreeMap();
+        for (Cliente cliente: clientes)
+            mapClientes.put(cliente.getCodigo(), cliente.toString());
+        return mapClientes;
     }
     
     public void guardarDatoCliente() {
