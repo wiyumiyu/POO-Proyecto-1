@@ -1,5 +1,6 @@
 package wiyu.barberia_poo.Clases;
 
+import java.io.Serializable;
 import java.time.DayOfWeek; // https://www.baeldung.com/java-get-day-of-week
 import java.time.Duration;
 import java.time.LocalTime;
@@ -13,7 +14,7 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
-public class HorarioDia {
+public class HorarioDia implements Serializable{
     
     private DayOfWeek dia;
     private LocalTime inicio;

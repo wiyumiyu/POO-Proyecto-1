@@ -12,7 +12,7 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
-public class Cliente{
+public class Cliente implements Serializable{
     
     public static int consecutivo = 1;
     private int codigo;

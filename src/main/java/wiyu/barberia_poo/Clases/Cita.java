@@ -1,5 +1,6 @@
 package wiyu.barberia_poo.Clases;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -10,7 +11,7 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
-public class Cita {
+public class Cita implements Serializable{
     public static int consecutivo = 1;
     private int codigo;
     private LocalDate dia;

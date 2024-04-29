@@ -1,5 +1,7 @@
 package wiyu.barberia_poo.Clases;
 
+import java.io.Serializable;
+
 /*
 Proyecto 1 POO - Barbería
 Dayron Porras Perez
@@ -7,7 +9,7 @@ Amanda Ramirez Viales
 Mariana Torres Valverde
  */
 
-public class Servicio {
+public class Servicio implements Serializable{
     
     public static int consecutivo = 1;
     private int codigo;
