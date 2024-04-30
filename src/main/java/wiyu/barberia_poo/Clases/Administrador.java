@@ -86,7 +86,7 @@ public class Administrador {
     }
     
     /*
-    Metodo reasigna el valor del consecutivo de la clase cliente
+    Metodo reasigna el valor del consecutivo de cliente
     */
     private void reasignarConsecutivoCliente() {
         int mayor = 0; // inicia en un numero mayor a 0
@@ -99,7 +99,7 @@ public class Administrador {
     }
     
     /*
-    Metodo reasigna el valor del consecutivo de la clase Servicio
+    Metodo reasigna el valor del consecutivo de Servicio
     Busca el código más alto la lista y reasignan el valor consecutivo para tener 
     un nuevo código único. 
     
@@ -115,7 +115,7 @@ public class Administrador {
     }
     
     /*
-    Metodo reasigna el valor del consecutivo de la clase Cita
+    Metodo reasigna el valor del consecutivo de Cita
     */
     private void reasignarConsecutivoCita() {
         int mayor = 0;
@@ -279,11 +279,11 @@ public class Administrador {
     Método para modificar un Tipo de Servicio 
     */    
     public void modificarTipoServicio(int codigoServicio, String tipo, String descripcion) throws Exception{
-        Servicio servicio = obtenerServicio(codigoServicio);
-        if (servicio == null)
-            throw new Exception("Servicio no existente");
-        servicio.modificarServicio(tipo, descripcion);
-        guardarDatoServicio();
+        Servicio servicio = obtenerServicio(codigoServicio); // obtiene el codigo de servicio del tipo de servicio
+        if (servicio == null) // si es null no se encontro ningun tipo de servicio
+            throw new Exception("Servicio no existente"); // manda una excepción
+        servicio.modificarServicio(tipo, descripcion); // si encuentra actualiza el tipo y la descripción
+        guardarDatoServicio(); // actualiza los datos del servicio
     }
     /*
     Método para Borrar un Tipo de Servicio 
@@ -292,7 +292,7 @@ public class Administrador {
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
             throw new Exception("Servicio no existente");
-        servicios.remove(servicio);
+        servicios.remove(servicio); // si encuentra un servicio borra el servicio
         guardarDatoServicio();
     }
     /*
@@ -302,28 +302,28 @@ public class Administrador {
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
             throw new Exception("Servicio no existente");
-        return servicio.toString();
+        return servicio.toString(); // devuelve el tipo de servicio a consultar
     }
      /*
     Método para Enseñar Lista de Espera
     */    
     public String mostrarListaEspera() throws Exception{
-        String listaEsperaString = "";
-        for (Cliente clienteEspera : listaDeEspera){
-            listaEsperaString += clienteEspera.toString();
+        String listaEsperaString = ""; //se inicia como un string vacío
+        for (Cliente clienteEspera : listaDeEspera){ // entra en bucle para almacenar los string en la lista de Espera 
+            listaEsperaString += clienteEspera.toString(); // devuelve los string en texto que representa la información del cliente
         }
-        return listaEsperaString;
+        return listaEsperaString; //devuelve la lista de Espera actualizada
     }
      /*
     Método para Agregar cliente a la Lista de Espera
     */     
     public void agregarClienteListaEspera(int codigoCliente) throws Exception{
         //Registra el cliente en la lista de espera
-        Cliente cliente = obtenerCliente(codigoCliente);
+        Cliente cliente = obtenerCliente(codigoCliente); 
         if (cliente == null)
             throw new Exception("Cliente no existente");
-        listaDeEspera.add(cliente);
-        guardarDatoListaEspera();
+        listaDeEspera.add(cliente); // agrega el cliente a la lista
+        guardarDatoListaEspera(); //actualiza
     }
      /*
     Método para Borrar cliente a la Lista de Espera
@@ -331,7 +331,7 @@ public class Administrador {
     public void borrarClienteListaEspera(int codigoCliente) throws Exception{
         Cliente cliente = null;
         for (Cliente clienteListaEspera : listaDeEspera){
-            if (clienteListaEspera.getCodigo() == codigoCliente){
+            if (clienteListaEspera.getCodigo() == codigoCliente){ // obtiene el codigo del cliente actual
                 cliente = clienteListaEspera;
                 break;
             }
