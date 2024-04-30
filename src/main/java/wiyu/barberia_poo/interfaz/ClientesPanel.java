@@ -21,6 +21,7 @@ public class ClientesPanel extends javax.swing.JPanel {
      */
     public ClientesPanel() {
         initComponents();
+        actualizarListMode();
     }
 
     /**
@@ -51,8 +52,18 @@ public class ClientesPanel extends javax.swing.JPanel {
         LabelFondo = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(671, 480));
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPanel1FocusGained(evt);
+            }
+        });
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BotonEliminar.setText("Eliminar");
@@ -71,6 +82,11 @@ public class ClientesPanel extends javax.swing.JPanel {
         });
         jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 260, 90, 30));
 
+        ListaClientes.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                ListaClientesFocusGained(evt);
+            }
+        });
         jScrollPane1.setViewportView(ListaClientes);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 180));
@@ -153,19 +169,14 @@ public class ClientesPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LabelFondoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_LabelFondoFocusGained
-        DefaultListModel<Entry<Integer, String>> lista = new DefaultListModel();
-        Map<Integer, String> clientes = admin.getClientes();
-        for (Entry <Integer, String> cliente: clientes.entrySet()){
-            lista.addElement(cliente);
-        }
-        ListaClientes.setModel(lista);
+        
     }//GEN-LAST:event_LabelFondoFocusGained
     //Elimina un cliente pero primero solicita una confirmacion
     private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
         if (ListaClientes.getSelectedIndex() != -1){
             Entry<Integer, String> cliente = ListaClientes.getSelectedValue();
             int codigoCliente = cliente.getKey();
-            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente de forma permanente?", "Eliminar cliente", JOptionPane.QUESTION_MESSAGE);
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este cliente de forma permanente?");
             if (eliminar == JOptionPane.YES_OPTION){
                 try{
                     admin.borrarCliente(codigoCliente);
@@ -177,6 +188,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Ningún cliente ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
         }
+        actualizarListMode();
     }//GEN-LAST:event_BotonEliminarActionPerformed
     //Pide los elementos necesarios para agregar un nuevo cliente
     private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
@@ -192,6 +204,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         entryNombre.setText("");
         entryEmail.setText("");
         entryTelefono.setText("(506)");
+        actualizarListMode();
     }//GEN-LAST:event_BotonAgregarActionPerformed
     //Pone visibles los elementos necesarios para hacer modificaciones
     private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
@@ -226,6 +239,7 @@ public class ClientesPanel extends javax.swing.JPanel {
         entryNombre.setText("");
         entryEmail.setText("");
         entryTelefono.setText("(506)");
+        actualizarListMode();
     }//GEN-LAST:event_BotonConfirmarModificacionActionPerformed
     //Cancela la modificacion y vuelve todo como al estado inicial
     private void BotonCancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarModificacionActionPerformed
@@ -239,6 +253,25 @@ public class ClientesPanel extends javax.swing.JPanel {
         entryTelefono.setText("(506)");
     }//GEN-LAST:event_BotonCancelarModificacionActionPerformed
 
+    private void ListaClientesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_ListaClientesFocusGained
+        
+    }//GEN-LAST:event_ListaClientesFocusGained
+
+    private void jPanel1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPanel1FocusGained
+        
+    }//GEN-LAST:event_jPanel1FocusGained
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        
+    }//GEN-LAST:event_formFocusGained
+    private void actualizarListMode(){
+        DefaultListModel<Entry<Integer, String>> lista = new DefaultListModel();
+        Map<Integer, String> clientes = admin.getClientes();
+        for (Entry <Integer, String> cliente: clientes.entrySet()){
+            lista.addElement(cliente);
+        }
+        ListaClientes.setModel(lista);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregar;

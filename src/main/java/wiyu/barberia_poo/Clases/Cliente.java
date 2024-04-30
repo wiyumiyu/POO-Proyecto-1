@@ -108,10 +108,9 @@ public class Cliente implements Serializable{
     }
     @Override
     public String toString() {
-        String result =  "Código del cliente: " + codigo +"\n";
-        result +=  "Nombre: " + nombre +"\n";
-        result += "Teléfono: " + telefono +"\n";
-        result += "Correo electrónico: " + correo +"\n";
+        String result = "Nombre: " + nombre +"\n";
+        result += " Teléfono: " + telefono +"\n";
+        result += " Correo electrónico: " + correo +"\n";
         return result;
     }
     

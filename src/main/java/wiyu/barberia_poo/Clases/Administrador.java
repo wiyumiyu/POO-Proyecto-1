@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -26,7 +27,7 @@ Contiene ArrayList con diferentes tipos de datos
 para almacenar y controlar los datos
 */
 
-public class Administrador {
+public class Administrador implements Serializable{
     ArrayList<Cliente> clientes;
     ArrayList<Cita> citas;
     ArrayList<Servicio> servicios;
