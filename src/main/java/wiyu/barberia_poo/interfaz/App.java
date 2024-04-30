@@ -66,7 +66,7 @@ public class App extends javax.swing.JFrame {
                 BotonClientesActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 180, 43));
+        jPanel3.add(BotonClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 180, 43));
 
         BotonServicios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Servicios.png"))); // NOI18N
         BotonServicios.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +74,7 @@ public class App extends javax.swing.JFrame {
                 BotonServiciosActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 180, 43));
+        jPanel3.add(BotonServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 180, 57));
 
         BotonCitas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Citas.png"))); // NOI18N
         BotonCitas.addActionListener(new java.awt.event.ActionListener() {
@@ -82,7 +82,7 @@ public class App extends javax.swing.JFrame {
                 BotonCitasActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 180, 43));
+        jPanel3.add(BotonCitas, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 180, 43));
 
         BotonListaEspera.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/ListaEspera.png"))); // NOI18N
         BotonListaEspera.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +90,7 @@ public class App extends javax.swing.JFrame {
                 BotonListaEsperaActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonListaEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 180, 43));
+        jPanel3.add(BotonListaEspera, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 180, 43));
 
         BotonHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/HorarioAtencion.png"))); // NOI18N
         BotonHorario.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +98,7 @@ public class App extends javax.swing.JFrame {
                 BotonHorarioActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 180, 43));
+        jPanel3.add(BotonHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 180, 43));
 
         BotonAgenda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Agenda-1.png"))); // NOI18N
         BotonAgenda.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +106,7 @@ public class App extends javax.swing.JFrame {
                 BotonAgendaActionPerformed(evt);
             }
         });
-        jPanel3.add(BotonAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 180, 43));
+        jPanel3.add(BotonAgenda, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 180, 43));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Barberia.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
