@@ -258,11 +258,11 @@ public class Administrador {
     Método para Confirmar una cita
     */
     public void confirmarCita(int codigoCita) throws Exception{
-        Cita cita = obtenerCita(codigoCita);
+        Cita cita = obtenerCita(codigoCita); //  
         if (cita == null)
             throw new Exception("Cita no existente");
-        cita.setConfirmada(true);
-        guardarDatoCita();
+        cita.setConfirmada(true); //si existe una cita se llama al metodo y cambia el estado de la cita a confirmada
+        guardarDatoCita(); // guarda los cambios
     }
 
      /*
@@ -271,11 +271,13 @@ public class Administrador {
     public int crearTipoServicio(String tipo, String descripcion) throws Exception{
         //Registra el tipo de servicio
         Servicio servicio = new Servicio(tipo, descripcion);
-        servicios.add(servicio);
-        guardarDatoServicio();
-        return servicio.getCodigo();
+        servicios.add(servicio); //agrega el servicio
+        guardarDatoServicio(); // guarda el servicio
+        return servicio.getCodigo(); //devuelve el código nuevo y único asignado al nuevo tipo de servicio creado
     }
-    
+    /*
+    Método para modificar un Tipo de Servicio 
+    */    
     public void modificarTipoServicio(int codigoServicio, String tipo, String descripcion) throws Exception{
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
@@ -283,7 +285,9 @@ public class Administrador {
         servicio.modificarServicio(tipo, descripcion);
         guardarDatoServicio();
     }
-    
+    /*
+    Método para Borrar un Tipo de Servicio 
+    */    
     public void borrarTipoServicio(int codigoServicio) throws Exception{
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
@@ -291,14 +295,18 @@ public class Administrador {
         servicios.remove(servicio);
         guardarDatoServicio();
     }
-    
+    /*
+    Método para Consultar un Tipo de Servicio 
+    */    
     public String consultarTipoServicio(int codigoServicio) throws Exception{
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
             throw new Exception("Servicio no existente");
         return servicio.toString();
     }
-    
+     /*
+    Método para Enseñar Lista de Espera
+    */    
     public String mostrarListaEspera() throws Exception{
         String listaEsperaString = "";
         for (Cliente clienteEspera : listaDeEspera){
@@ -306,7 +314,9 @@ public class Administrador {
         }
         return listaEsperaString;
     }
-    
+     /*
+    Método para Agregar cliente a la Lista de Espera
+    */     
     public void agregarClienteListaEspera(int codigoCliente) throws Exception{
         //Registra el cliente en la lista de espera
         Cliente cliente = obtenerCliente(codigoCliente);
@@ -315,7 +325,9 @@ public class Administrador {
         listaDeEspera.add(cliente);
         guardarDatoListaEspera();
     }
-    
+     /*
+    Método para Borrar cliente a la Lista de Espera
+    */     
     public void borrarClienteListaEspera(int codigoCliente) throws Exception{
         Cliente cliente = null;
         for (Cliente clienteListaEspera : listaDeEspera){
@@ -330,13 +342,16 @@ public class Administrador {
         listaDeEspera.remove(cliente);
         guardarDatoListaEspera();
     }
-    
+    /*
+    Método para Establecer el Horario de Atención al cliente
+    */    
     public void establecerHorarioAtencion(DayOfWeek dia, LocalTime inicio, LocalTime fin) throws Exception{
         //Registra el horario de atencion
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
         guardarDatoHorario();
     }
+
     
     //Funcion que retorna un Map de clientes con relación Codigo-String
     public Map<Integer, String> getClientes(){
@@ -345,7 +360,10 @@ public class Administrador {
             mapClientes.put(cliente.getCodigo(), cliente.toString());
         return mapClientes;
     }
-    
+
+     /*
+    Método para Guardar los datos del Cliente 
+    */      
     public void guardarDatoCliente() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaClientes.bin");
@@ -358,7 +376,9 @@ public class Administrador {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Guardar los datos del Servicio
+    */       
     public void guardarDatoServicio() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaServicios.bin");
@@ -371,7 +391,9 @@ public class Administrador {
             System.err.println("Error al escribir el archivo: " + e.getMessage());
         }
     }
-    
+     /*
+    Método para Guardar datos de Cita
+    */      
     public void guardarDatoCita() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaCita.bin");
