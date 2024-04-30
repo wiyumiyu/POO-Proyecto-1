@@ -4,17 +4,22 @@
  */
 package wiyu.barberia_poo.interfaz;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import wiyu.barberia_poo.Clases.Administrador;
+
 /**
  *
  * @author maria
  */
 public class CitasPanel extends javax.swing.JPanel {
-
+    Administrador admin = new Administrador();
     /**
      * Creates new form CitasPanel
      */
     public CitasPanel() {
         initComponents();
+        cargarComboClientes();
     }
 
     /**
@@ -27,22 +32,65 @@ public class CitasPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListaCitas = new javax.swing.JList<>();
+        BotonModificar = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
+        BotonAgregar = new javax.swing.JButton();
+        ComboClientes = new javax.swing.JComboBox<>();
+        ComboServicios = new javax.swing.JComboBox<>();
+        labelAgregarCita = new javax.swing.JLabel();
+        labelCliente = new javax.swing.JLabel();
+        labelServicio = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setViewportView(ListaCitas);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 150));
+
+        BotonModificar.setText("Modificar");
+        jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 90, 30));
+
+        BotonEliminar.setText("Eliminar");
+        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 90, 30));
+
+        BotonAgregar.setText("Agregar");
+        jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
+
+        ComboClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboClientesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ComboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 170, 30));
+
+        ComboServicios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboServiciosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ComboServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 170, 30));
+
+        labelAgregarCita.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelAgregarCita.setForeground(new java.awt.Color(255, 255, 255));
+        labelAgregarCita.setText("AGREGAR CITA");
+        jPanel1.add(labelAgregarCita, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 300, -1, -1));
+
+        labelCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelCliente.setForeground(new java.awt.Color(255, 255, 255));
+        labelCliente.setText("CLIENTE");
+        jPanel1.add(labelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
+
+        labelServicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelServicio.setForeground(new java.awt.Color(255, 255, 255));
+        labelServicio.setText("SERVICIO");
+        jPanel1.add(labelServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/cit.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,9 +104,32 @@ public class CitasPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ComboClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboClientesActionPerformed
+        
+    }//GEN-LAST:event_ComboClientesActionPerformed
+
+    private void ComboServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboServiciosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboServiciosActionPerformed
+    private void cargarComboClientes(){
+        Map<Integer, String> clientes = admin.getNombreClientes();
+        for (Entry <Integer, String> cliente: clientes.entrySet()){
+            ComboClientes.addItem(cliente.getKey() + "= " + cliente.getValue());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonEliminar;
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JComboBox<String> ComboClientes;
+    private javax.swing.JComboBox<String> ComboServicios;
+    private javax.swing.JList<String> ListaCitas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelAgregarCita;
+    private javax.swing.JLabel labelCliente;
+    private javax.swing.JLabel labelServicio;
     // End of variables declaration//GEN-END:variables
 }

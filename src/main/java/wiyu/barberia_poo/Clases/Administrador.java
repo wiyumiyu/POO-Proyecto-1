@@ -361,11 +361,18 @@ public class Administrador implements Serializable{
             mapClientes.put(cliente.getCodigo(), cliente.toString());
         return mapClientes;
     }
+    //Funcion que retorna un Map de los nombres de los clientes con relación Codigo-String
+    public Map<Integer, String> getNombreClientes(){
+        Map<Integer, String> mapClientes = new TreeMap();
+        for (Cliente cliente: clientes)
+            mapClientes.put(cliente.getCodigo(), cliente.getNombre());
+        return mapClientes;
+    }
 
      /*
     Método para Guardar los datos del Cliente 
     */      
-    public void guardarDatoCliente() {
+    private void guardarDatoCliente() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaClientes.bin");
             ObjectOutputStream stream = new ObjectOutputStream(file);
@@ -380,7 +387,7 @@ public class Administrador implements Serializable{
      /*
     Método para Guardar los datos del Servicio
     */       
-    public void guardarDatoServicio() {
+    private void guardarDatoServicio() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaServicios.bin");
             ObjectOutputStream stream = new ObjectOutputStream(file);
@@ -395,7 +402,7 @@ public class Administrador implements Serializable{
      /*
     Método para Guardar datos de Cita
     */      
-    public void guardarDatoCita() {
+    private void guardarDatoCita() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaCita.bin");
             ObjectOutputStream stream = new ObjectOutputStream(file);
@@ -410,7 +417,7 @@ public class Administrador implements Serializable{
      /*
     Método para Guardar datos de lista de Espera
     */      
-    public void guardarDatoListaEspera() {
+    private void guardarDatoListaEspera() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaListaEspera.bin");
             ObjectOutputStream stream = new ObjectOutputStream(file);
@@ -425,7 +432,7 @@ public class Administrador implements Serializable{
      /*
     Método para Guardar datos de Horario
     */        
-    public void guardarDatoHorario() {
+    private void guardarDatoHorario() {
         try{
             FileOutputStream file = new FileOutputStream("BarberiaHorario.bin");
             ObjectOutputStream stream = new ObjectOutputStream(file);
@@ -440,7 +447,7 @@ public class Administrador implements Serializable{
      /*
     Método para Cargar datos de Cliente
     */        
-    public void cargarDatosCliente() {
+    private void cargarDatosCliente() {
         try{
             File archivo = new File("BarberiaClientes.bin");
 
@@ -467,7 +474,7 @@ public class Administrador implements Serializable{
      /*
     Método para Cargar datos de Servicio
     */        
-    public void cargarDatosServicio() {
+    private void cargarDatosServicio() {
         try{
             File archivo = new File("BarberiaServicios.bin");
 
@@ -494,7 +501,7 @@ public class Administrador implements Serializable{
      /*
     Método para Cargar datos de cita
     */        
-    public void cargarDatosCita() {
+    private void cargarDatosCita() {
         try{
             File archivo = new File("BarberiaCita.bin");
 
@@ -521,7 +528,7 @@ public class Administrador implements Serializable{
      /*
     Método para Cargar datos de Lista de Espera
     */        
-    public void cargarDatosListaEspera() {
+    private void cargarDatosListaEspera() {
         try{
             File archivo = new File("BarberiaListaEspera.bin");
 
@@ -547,7 +554,7 @@ public class Administrador implements Serializable{
      /*
     Método para Cargar datos de Horario
     */    
-    public void cargarDatosHorario() {
+    private void cargarDatosHorario() {
         try{
             File archivo = new File("BarberiaHorario.bin");
 
