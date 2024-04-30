@@ -237,22 +237,23 @@ public class Administrador {
     Método para Borrar una cita 
     */ 
     public void borrarCita(int codigoCita) throws Exception{
-        Cita cita = obtenerCita(codigoCita);
-        if (cita == null)
-            throw new Exception("Cita no existente");
-        citas.remove(cita);
-        guardarDatoCita();
+        Cita cita = obtenerCita(codigoCita); // llama a ObtenerCita para tener el codigo de cita y se almacena en cita
+        if (cita == null) //si no encuentra una cita
+            throw new Exception("Cita no existente"); //manda una excepcion
+        citas.remove(cita); // si la cita se encuentra, se elimina de la lista de citas
+        guardarDatoCita(); //guarda cambios realizados
     }
     
     /*
-    Método para Cosultar un cita
+    Método para Cosultar un cita y devuelve la información de la cita 
     */ 
-    public String consultarCita(int codigoCita) throws Exception{
-        Cita cita = obtenerCita(codigoCita);
-        if (cita == null)
+    public String consultarCita(int codigoCita) throws Exception{ 
+        Cita cita = obtenerCita(codigoCita); // se obtiene la cita y se guarda en cita
+        if (cita == null) // si no encuentra una cita manda una excepción
             throw new Exception("Cita no existente");
-        return cita.toString();
+        return cita.toString(); // si encontró una cita la convierte en una cadena de texto con la información de la cita
     }
+    
      /*
     Método para Confirmar una cita
     */
@@ -263,7 +264,10 @@ public class Administrador {
         cita.setConfirmada(true);
         guardarDatoCita();
     }
-    
+
+     /*
+    Método para agregar un Tipo de Servicio 
+    */    
     public int crearTipoServicio(String tipo, String descripcion) throws Exception{
         //Registra el tipo de servicio
         Servicio servicio = new Servicio(tipo, descripcion);
