@@ -43,7 +43,6 @@ public class App extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        BototonNotificar = new javax.swing.JButton();
         BotonClientes = new javax.swing.JButton();
         BotonServicios = new javax.swing.JButton();
         BotonCitas = new javax.swing.JButton();
@@ -60,14 +59,6 @@ public class App extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        BototonNotificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Notificar.png"))); // NOI18N
-        BototonNotificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BototonNotificarActionPerformed(evt);
-            }
-        });
-        jPanel3.add(BototonNotificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 180, 57));
 
         BotonClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Clientes.png"))); // NOI18N
         BotonClientes.addActionListener(new java.awt.event.ActionListener() {
@@ -191,11 +182,6 @@ public class App extends javax.swing.JFrame {
         ShowPanel(p5);
     }//GEN-LAST:event_BotonListaEsperaActionPerformed
 
-    private void BototonNotificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BototonNotificarActionPerformed
-        NotificacionesPanel p6 = new NotificacionesPanel();
-        ShowPanel(p6);
-    }//GEN-LAST:event_BototonNotificarActionPerformed
-
     private void BotonCitasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCitasActionPerformed
         CitasPanel p7 = new CitasPanel();
         ShowPanel(p7);
@@ -243,7 +229,6 @@ public class App extends javax.swing.JFrame {
     private javax.swing.JButton BotonHorario;
     private javax.swing.JButton BotonListaEspera;
     private javax.swing.JButton BotonServicios;
-    private javax.swing.JButton BototonNotificar;
     private javax.swing.JPanel content;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
