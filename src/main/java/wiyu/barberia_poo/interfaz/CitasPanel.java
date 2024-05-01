@@ -7,7 +7,6 @@ package wiyu.barberia_poo.interfaz;
 import java.util.Map;
 import java.util.Map.Entry;
 import wiyu.barberia_poo.Clases.Administrador;
-
 /**
  *
  * @author maria
@@ -37,6 +36,7 @@ public class CitasPanel extends javax.swing.JPanel {
         BotonModificar = new javax.swing.JButton();
         BotonEliminar = new javax.swing.JButton();
         BotonAgregar = new javax.swing.JButton();
+        BotonConfirmar = new javax.swing.JButton();
         ComboClientes = new javax.swing.JComboBox<>();
         ComboServicios = new javax.swing.JComboBox<>();
         labelAgregarCita = new javax.swing.JLabel();
@@ -59,6 +59,14 @@ public class CitasPanel extends javax.swing.JPanel {
 
         BotonAgregar.setText("Agregar");
         jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
+
+        BotonConfirmar.setText("Confirmar cita");
+        BotonConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConfirmarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 110, 30));
 
         ComboClientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,6 +119,10 @@ public class CitasPanel extends javax.swing.JPanel {
     private void ComboServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboServiciosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboServiciosActionPerformed
+
+    private void BotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BotonConfirmarActionPerformed
     private void cargarComboClientes(){
         Map<Integer, String> clientes = admin.getNombreClientes();
         for (Entry <Integer, String> cliente: clientes.entrySet()){
@@ -120,6 +132,7 @@ public class CitasPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonConfirmar;
     private javax.swing.JButton BotonEliminar;
     private javax.swing.JButton BotonModificar;
     private javax.swing.JComboBox<String> ComboClientes;

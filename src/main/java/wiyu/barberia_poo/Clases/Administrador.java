@@ -368,7 +368,15 @@ public class Administrador implements Serializable{
             mapClientes.put(cliente.getCodigo(), cliente.getNombre());
         return mapClientes;
     }
-
+    /*
+    Método para obtener la Lista de Espera en relacion Codigo-String
+    */    
+    public Map<Integer, String> getListaEspera(){
+        Map<Integer, String> mapClientes = new TreeMap();
+        for (Cliente cliente: listaDeEspera)
+            mapClientes.put(cliente.getCodigo(), cliente.toString());
+        return mapClientes;
+    }
      /*
     Método para Guardar los datos del Cliente 
     */      
