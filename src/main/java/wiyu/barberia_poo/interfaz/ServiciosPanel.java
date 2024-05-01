@@ -4,17 +4,25 @@
  */
 package wiyu.barberia_poo.interfaz;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import wiyu.barberia_poo.Clases.Administrador;
+
 /**
  *
  * @author maria
  */
 public class ServiciosPanel extends javax.swing.JPanel {
-
+    Administrador admin = new Administrador();
     /**
      * Creates new form ServiciosPanel
      */
     public ServiciosPanel() {
         initComponents();
+        actualizarListMode();
     }
 
     /**
@@ -27,22 +35,95 @@ public class ServiciosPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ListaServicios = new javax.swing.JList<>();
+        BotonModificar = new javax.swing.JButton();
+        BotonEliminar = new javax.swing.JButton();
+        DescripcionEntry = new javax.swing.JTextField();
+        TipoEntry = new javax.swing.JTextField();
+        BotonAgregar = new javax.swing.JButton();
+        BotonCancelarModificacion = new javax.swing.JButton();
+        BotonConfirmarModificacion = new javax.swing.JButton();
+        LabelTipoServicio = new javax.swing.JLabel();
+        LabelDescripcion = new javax.swing.JLabel();
+        LabelAgregarServicio = new javax.swing.JLabel();
+        LabelCambiarDatos = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setViewportView(ListaServicios);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 610, 150));
+
+        BotonModificar.setText("Modificar");
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonModificarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 240, 120, 30));
+
+        BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 240, 120, 30));
+        jPanel1.add(DescripcionEntry, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 300, 110));
+        jPanel1.add(TipoEntry, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 340, 280, 60));
+
+        BotonAgregar.setText("Agregar");
+        BotonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 130, 30));
+
+        BotonCancelarModificacion.setText("Cancelar");
+        BotonCancelarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonCancelarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 420, 130, 30));
+        BotonCancelarModificacion.setVisible(false);
+
+        BotonConfirmarModificacion.setText("Confirmar");
+        BotonConfirmarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConfirmarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonConfirmarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 420, 130, 30));
+        BotonConfirmarModificacion.setVisible(false);
+
+        LabelTipoServicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelTipoServicio.setForeground(new java.awt.Color(255, 255, 255));
+        LabelTipoServicio.setText("TIPO DE SERVICIO");
+        jPanel1.add(LabelTipoServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 310, -1, -1));
+
+        LabelDescripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        LabelDescripcion.setText("DESCRIPCIÓN DEL SERVICIO");
+        jPanel1.add(LabelDescripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 310, -1, -1));
+
+        LabelAgregarServicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelAgregarServicio.setForeground(new java.awt.Color(255, 255, 255));
+        LabelAgregarServicio.setText("AGREGAR SERVICIO");
+        jPanel1.add(LabelAgregarServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 280, -1, -1));
+
+        LabelCambiarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelCambiarDatos.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCambiarDatos.setText("INGRESE LOS NUEVOS DATOS DEL SERVICIO");
+        jPanel1.add(LabelCambiarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, -1, -1));
+        LabelCambiarDatos.setVisible(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Service.png"))); // NOI18N
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -56,9 +137,105 @@ public class ServiciosPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+        LabelAgregarServicio.setVisible(false);
+        LabelCambiarDatos.setVisible(true);
+        BotonConfirmarModificacion.setVisible(true);
+        BotonCancelarModificacion.setVisible(true);
+        BotonAgregar.setVisible(false);
+    }//GEN-LAST:event_BotonModificarActionPerformed
+
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        if (ListaServicios.getSelectedIndex() != -1){
+            Map.Entry<Integer, String> servicio = ListaServicios.getSelectedValue();
+            int codigoServicio = servicio.getKey();
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este servicio de forma permanente?");
+            if (eliminar == JOptionPane.YES_OPTION){
+                try{
+                    admin.borrarTipoServicio(codigoServicio);
+                    JOptionPane.showMessageDialog(null, "Servicio eliminado con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ningún servicio ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarListMode();
+    }//GEN-LAST:event_BotonEliminarActionPerformed
+
+    private void BotonConfirmarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarModificacionActionPerformed
+        LabelAgregarServicio.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        try{
+            if (ListaServicios.getSelectedIndex() != -1){
+                Map.Entry<Integer, String> servicio = ListaServicios.getSelectedValue();
+                int codigoServicio = servicio.getKey();
+                String tipo = TipoEntry.getText();
+                String descripcion = DescripcionEntry.getText();
+                admin.modificarTipoServicio(codigoServicio, tipo, descripcion);
+                JOptionPane.showMessageDialog(null, "Servicio modificado con éxito", "MODIFICACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ningún servicio ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+            }    
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        DescripcionEntry.setText("");
+        TipoEntry.setText("");
+        actualizarListMode();
+    }//GEN-LAST:event_BotonConfirmarModificacionActionPerformed
+
+    private void BotonCancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarModificacionActionPerformed
+        LabelAgregarServicio.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        DescripcionEntry.setText("");
+        TipoEntry.setText("");
+    }//GEN-LAST:event_BotonCancelarModificacionActionPerformed
+
+    private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+        try{
+            String tipo = TipoEntry.getText();
+            String descripcion = DescripcionEntry.getText();
+            admin.crearTipoServicio(tipo, descripcion);
+            JOptionPane.showMessageDialog(null, "Servicio creado con éxito", "CREACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        TipoEntry.setText("");
+        DescripcionEntry.setText("");
+        actualizarListMode();
+    }//GEN-LAST:event_BotonAgregarActionPerformed
+    public void actualizarListMode(){
+        DefaultListModel<Map.Entry<Integer, String>> lista = new DefaultListModel();
+        Map<Integer, String> servicios = admin.getServicios();
+        for (Map.Entry <Integer, String> servicio: servicios.entrySet()){
+            lista.addElement(servicio);
+        }
+        ListaServicios.setModel(lista);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonCancelarModificacion;
+    private javax.swing.JButton BotonConfirmarModificacion;
+    private javax.swing.JButton BotonEliminar;
+    private javax.swing.JButton BotonModificar;
+    private javax.swing.JTextField DescripcionEntry;
+    private javax.swing.JLabel LabelAgregarServicio;
+    private javax.swing.JLabel LabelCambiarDatos;
+    private javax.swing.JLabel LabelDescripcion;
+    private javax.swing.JLabel LabelTipoServicio;
+    private javax.swing.JList<Map.Entry<Integer, String>> ListaServicios;
+    private javax.swing.JTextField TipoEntry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

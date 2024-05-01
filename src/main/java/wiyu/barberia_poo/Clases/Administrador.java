@@ -353,7 +353,13 @@ public class Administrador implements Serializable{
         guardarDatoHorario();
     }
 
-    
+    //Funcion que retorna un Map de servicios con relación Codigo-String
+    public Map<Integer, String> getServicios(){
+        Map<Integer, String> mapClientes = new TreeMap();
+        for (Servicio servicio: servicios)
+            mapClientes.put(servicio.getCodigo(), servicio.toString());
+        return mapClientes;
+    }
     //Funcion que retorna un Map de clientes con relación Codigo-String
     public Map<Integer, String> getClientes(){
         Map<Integer, String> mapClientes = new TreeMap();
