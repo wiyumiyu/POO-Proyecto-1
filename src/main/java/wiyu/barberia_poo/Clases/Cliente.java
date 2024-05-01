@@ -106,6 +106,9 @@ public class Cliente implements Serializable{
         }
         return null;
     }
+    public void guardarCita(Cita cita){
+        this.citas.add(cita);
+    }
     @Override
     public String toString() {
         String result = "Nombre: " + nombre +"\n";

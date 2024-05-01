@@ -2,7 +2,6 @@ package wiyu.barberia_poo.Clases;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 /*
 Proyecto 1 POO - Barbería
@@ -15,12 +14,12 @@ public class Cita implements Serializable{
     public static int consecutivo = 1;
     private int codigo;
     private LocalDate dia;
-    private LocalTime horaInicial;
+    private int horaInicial;
     private Servicio servicio;
     private Cliente cliente;
     private boolean confirmada;
 
-    public Cita(Cliente cliente, LocalDate dia, LocalTime horaInicial, Servicio servicio) {
+    public Cita(Cliente cliente, LocalDate dia, int horaInicial, Servicio servicio) {
         this.dia = dia;
         this.cliente = cliente;
         this.horaInicial = horaInicial;
@@ -46,11 +45,11 @@ public class Cita implements Serializable{
         return dia;
     }
 
-    public void setHoraInicial(LocalTime horaInicial) {
+    public void setHoraInicial(int horaInicial) {
         this.horaInicial = horaInicial;
     }
     
-    public LocalTime getHoraInicial() {
+    public int getHoraInicial() {
         return horaInicial;
     }
 
@@ -70,8 +69,8 @@ public class Cita implements Serializable{
         this.cliente = cliente;
     }
     
-    public String getHorario(){
-        return this.dia.toString() + this.horaInicial;
+    public String getHorarioStr(){
+        return this.dia + " a las " + this.horaInicial;
     }
     
     public boolean getConfirmada() {
@@ -82,7 +81,7 @@ public class Cita implements Serializable{
         this.confirmada = confirmada;
     }
     
-    public int modificarCita(LocalDate dia, LocalTime hora, Servicio servicio) {
+    public int modificarCita(LocalDate dia, int hora, Servicio servicio) {
         this.dia = dia;
         this.horaInicial =hora;
         this.servicio = servicio;

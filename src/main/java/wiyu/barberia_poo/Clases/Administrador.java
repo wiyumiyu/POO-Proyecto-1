@@ -178,30 +178,25 @@ public class Administrador implements Serializable{
     /*
     Método para obtener el Horario 
     */    
-    private HorarioDia obtenerHorario(DayOfWeek dia, LocalTime hora){ 
+    private HorarioDia obtenerHorario(String dia){ 
         for (HorarioDia horario : listaHorariosDia){ // recorre la lista
             if (horario.getDia().equals(dia)){ //compara el día de la semana actual con el día de la semana proporcionado 
-                if(hora.getHour() >= horario.getInicio().getHour() && hora.getHour() < horario.getFin().getHour()){ // compara la hora proporcionada con la hora de inicio y la hora de fin del objeto HorarioDia actual.
-                    return horario; //devuelve el objeto HorarioDia actual y ve que se ha encontrado una coincidencia/choque
-                }
+                return horario; //devuelve el objeto HorarioDia actual y ve que se ha encontrado una coincidencia/choque
             }
         }
         return null;
     }
+        
        /*
     Método para crear una Cita 
     */  
-    public int crearCita(int codigoCliente, LocalDate dia, LocalTime hora, int codigoServicio) throws Exception{
-        //validar que el dia y la hora este dentro del horario de atencion
-        //Author Baeldung https://www.baeldung.com/java-get-day-of-week
-        //getDayOfWeek obtiene el dia de la semana para verificar si ese dia es parte 
-        //del horario disponible
-        HorarioDia horario = obtenerHorario(dia.getDayOfWeek(), hora); 
-        if (horario == null)
+    public int crearCita(int codigoCliente, LocalDate dia, int hora, int codigoServicio) throws Exception{
+        HorarioDia horario = obtenerHorario(dia.getDayOfWeek().toString());
+        if (hora < horario.getInicio() || hora < horario.getFin()-1)
             throw new Exception("El día y hora seleccionados no pertenecen al horario de trabajo");
         //validar que el dia y hora no este ocupada en otra cita
         for (Cita cita : citas){
-            if (cita.getDia() == dia && cita.getHoraInicial() == hora){
+            if (cita.getDia().equals(dia) && cita.getHoraInicial() == hora && cita.getConfirmada()){
                 throw new Exception("Ya existe una cita en el día y hora seleccionados");
             }
         }
@@ -217,9 +212,9 @@ public class Administrador implements Serializable{
         /*
     Método para modificar una Cita
     */ 
-    public void modificarCita(int codigoCita, LocalDate dia, LocalTime hora, Servicio servicio) throws Exception{
+    public void modificarCita(int codigoCita, LocalDate dia, int hora, Servicio servicio) throws Exception{
         //validar que el dia y la hora este dentro del horario de atencion
-        HorarioDia horario = obtenerHorario(dia.getDayOfWeek(), hora); 
+        HorarioDia horario = obtenerHorario(dia.getDayOfWeek().toString()); 
         if (horario == null)
             throw new Exception("El día y hora seleccionados no pertenecen al horario de trabajo");
         //validar que el dia y hora no este ocupada en otra cita
@@ -346,7 +341,7 @@ public class Administrador implements Serializable{
     /*
     Método para Establecer el Horario de Atención al cliente
     */    
-    public void establecerHorarioAtencion(DayOfWeek dia, LocalTime inicio, LocalTime fin) throws Exception{
+    public void establecerHorarioAtencion(LocalDate dia, int inicio, int fin) throws Exception{
         //Registra el horario de atencion
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
