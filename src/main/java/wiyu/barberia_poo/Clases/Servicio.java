@@ -55,8 +55,8 @@ public class Servicio implements Serializable{
     @Override
     public String toString() {
         String result =  "Código del servicio: " + this.codigo +"\n";
-        result +=  "Tipo: " + this.tipo +"\n";
-        result += "Descripción: " + this.descripcion +"\n";
+        result +=  " Tipo: " + this.tipo +"\n";
+        result += " Descripción: " + this.descripcion +"\n";
         return result;
     }
     
