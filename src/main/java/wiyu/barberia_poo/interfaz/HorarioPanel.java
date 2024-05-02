@@ -4,17 +4,25 @@
  */
 package wiyu.barberia_poo.interfaz;
 
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import wiyu.barberia_poo.Clases.Administrador;
+
 /**
  *
  * @author maria
  */
 public class HorarioPanel extends javax.swing.JPanel {
-
+    Administrador admin = new Administrador();
+    
     /**
      * Creates new form HorarioPanel
      */
     public HorarioPanel() {
-        initComponents();
+        initComponents();    
+        cargarHorarioDia();
     }
 
     /**
@@ -28,45 +36,50 @@ public class HorarioPanel extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListaHorarios = new javax.swing.JList<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        ListaHorario = new javax.swing.JList<>();
+        ComboDia = new javax.swing.JComboBox<>();
+        ComboInicio = new javax.swing.JComboBox<>();
+        ComboFin = new javax.swing.JComboBox<>();
+        botonEliminar = new javax.swing.JButton();
+        agregarHorario = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setViewportView(ListaHorarios);
+        jScrollPane1.setViewportView(ListaHorario);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 610, 140));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 560, 140));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        ComboDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" }));
+        ComboDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                ComboDiaActionPerformed(evt);
             }
         });
-        jPanel1.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 130, 30));
+        jPanel1.add(ComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 340, 130, 30));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
-        jPanel1.add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 360, 90, 30));
+        ComboInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00" }));
+        jPanel1.add(ComboInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 90, 30));
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" }));
-        jPanel1.add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 360, 80, 30));
+        ComboFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" }));
+        jPanel1.add(ComboFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 80, 30));
 
-        jButton1.setText("Eliminar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        botonEliminar.setText("Eliminar");
+        botonEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                botonEliminarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(535, 240, 100, 30));
+        jPanel1.add(botonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 240, 100, 30));
 
-        jButton2.setText("Agregar");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 433, 80, 30));
+        agregarHorario.setText("Agregar");
+        agregarHorario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarHorarioActionPerformed(evt);
+            }
+        });
+        jPanel1.add(agregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 80, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Horario.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -75,7 +88,7 @@ public class HorarioPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -83,22 +96,59 @@ public class HorarioPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void ComboDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_ComboDiaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void agregarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarHorarioActionPerformed
+        try{
+            int dia = ComboDia.getSelectedIndex() + 1;
+            int inicio = ComboInicio.getSelectedIndex();
+            int fin = ComboFin.getSelectedIndex() + 1;
+            admin.establecerHorarioAtencion(dia, inicio, fin);
+            JOptionPane.showMessageDialog(null, "Horario de atención creado con éxito", "CREACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        cargarHorarioDia();
+    }//GEN-LAST:event_agregarHorarioActionPerformed
 
+    private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
+        if (ListaHorario.getSelectedIndex() != -1){
+            Map.Entry<Integer, String> horario = ListaHorario.getSelectedValue();
+            int codigoDia = horario.getKey();
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar este horario de forma permanente?");
+            if (eliminar == JOptionPane.YES_OPTION){
+                try{
+                    admin.borrarHorarioAtencion(codigoDia);
+                    JOptionPane.showMessageDialog(null, "Horario eliminado con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ningún servicio ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+        }
+        cargarHorarioDia();
+    }//GEN-LAST:event_botonEliminarActionPerformed
+
+    private void cargarHorarioDia(){
+        DefaultListModel<Map.Entry<Integer, String>> lista = new DefaultListModel();
+        Map<Integer, String> horarios = admin.getHorarios();
+        for (Map.Entry <Integer, String> horario: horarios.entrySet()){
+            lista.addElement(horario);
+        }
+        ListaHorario.setModel(lista);
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> ListaHorarios;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> ComboDia;
+    private javax.swing.JComboBox<String> ComboFin;
+    private javax.swing.JComboBox<String> ComboInicio;
+    private javax.swing.JList<Map.Entry<Integer, String>> ListaHorario;
+    private javax.swing.JButton agregarHorario;
+    private javax.swing.JButton botonEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

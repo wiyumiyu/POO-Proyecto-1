@@ -4,8 +4,12 @@
  */
 package wiyu.barberia_poo.interfaz;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Map.Entry;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import wiyu.barberia_poo.Clases.Administrador;
 /**
  *
@@ -18,7 +22,12 @@ public class CitasPanel extends javax.swing.JPanel {
      */
     public CitasPanel() {
         initComponents();
-        cargarComboClientes();
+        actualizarListMode();
+        cargarComboClientes();        
+        cargarComboServicios();
+        cargarMeses();
+        cargarDias();
+        cargarHoras();
     }
 
     /**
@@ -30,6 +39,9 @@ public class CitasPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        label1 = new java.awt.Label();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ListaCitas = new javax.swing.JList<>();
@@ -42,7 +54,24 @@ public class CitasPanel extends javax.swing.JPanel {
         labelAgregarCita = new javax.swing.JLabel();
         labelCliente = new javax.swing.JLabel();
         labelServicio = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        ComboDia = new javax.swing.JComboBox<>();
+        ComboMes = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        ComboHora = new javax.swing.JComboBox<>();
+        ComboAno = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        labelServicio1 = new javax.swing.JLabel();
+        labelServicio2 = new javax.swing.JLabel();
+        labelServicio3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jSpinner2 = new javax.swing.JSpinner();
+
+        jLabel2.setText("jLabel2");
+
+        jLabel3.setText("jLabel3");
+
+        label1.setText("label1");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -55,9 +84,19 @@ public class CitasPanel extends javax.swing.JPanel {
         jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 90, 30));
 
         BotonEliminar.setText("Eliminar");
+        BotonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonEliminarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BotonEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 230, 90, 30));
 
         BotonAgregar.setText("Agregar");
+        BotonAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonAgregarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BotonAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 430, 90, 30));
 
         BotonConfirmar.setText("Confirmar cita");
@@ -73,14 +112,14 @@ public class CitasPanel extends javax.swing.JPanel {
                 ComboClientesActionPerformed(evt);
             }
         });
-        jPanel1.add(ComboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 370, 170, 30));
+        jPanel1.add(ComboClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 370, 170, 30));
 
         ComboServicios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboServiciosActionPerformed(evt);
             }
         });
-        jPanel1.add(ComboServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 370, 170, 30));
+        jPanel1.add(ComboServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 170, 30));
 
         labelAgregarCita.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelAgregarCita.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,21 +129,88 @@ public class CitasPanel extends javax.swing.JPanel {
         labelCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelCliente.setForeground(new java.awt.Color(255, 255, 255));
         labelCliente.setText("CLIENTE");
-        jPanel1.add(labelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
+        jPanel1.add(labelCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, -1, -1));
 
         labelServicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelServicio.setForeground(new java.awt.Color(255, 255, 255));
         labelServicio.setText("SERVICIO");
-        jPanel1.add(labelServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+        jPanel1.add(labelServicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 340, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("FECHA");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 100, -1));
+
+        ComboDia.setSelectedIndex(-1);
+        ComboDia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboDiaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 50, 30));
+
+        ComboMes.setSelectedIndex(-1);
+        ComboMes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboMesActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ComboMes, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 370, 90, 30));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("HORA");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 60, -1));
+
+        ComboHora.setSelectedIndex(-1);
+        ComboHora.setName("ComboHora"); // NOI18N
+        jPanel1.add(ComboHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 370, -1, 30));
+
+        ComboAno.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2024" }));
+        ComboAno.setName("ComboHora"); // NOI18N
+        ComboAno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboAnoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ComboAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 70, 30));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/cit.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
+
+        labelServicio1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelServicio1.setForeground(new java.awt.Color(255, 255, 255));
+        labelServicio1.setText("SERVICIO");
+        jPanel1.add(labelServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+
+        labelServicio2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelServicio2.setForeground(new java.awt.Color(255, 255, 255));
+        labelServicio2.setText("SERVICIO");
+        jPanel1.add(labelServicio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+
+        labelServicio3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        labelServicio3.setForeground(new java.awt.Color(255, 255, 255));
+        labelServicio3.setText("SERVICIO");
+        jPanel1.add(labelServicio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("FECHA");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 100, -1));
+
+        jSpinner2.setName("SpinnerAno"); // NOI18N
+        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,13 +227,157 @@ public class CitasPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_ComboServiciosActionPerformed
 
     private void BotonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarActionPerformed
-        // TODO add your handling code here:
+        if (ListaCitas.getSelectedIndex() != -1){
+            Entry<Integer, String> cita = ListaCitas.getSelectedValue();
+            int codigoCita = cita.getKey();
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea confirmar esta cita de forma permanente?");
+            if (eliminar == JOptionPane.YES_OPTION){
+                try{
+                    admin.confirmarCita(codigoCita);
+                    JOptionPane.showMessageDialog(null, "Cita confirmada con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ninguna cita ha sido seleccionada", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarListMode();
     }//GEN-LAST:event_BotonConfirmarActionPerformed
+
+    private void BotonAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAgregarActionPerformed
+        Entry<Integer,String> itemCliente = (Entry<Integer,String>) ComboClientes.getSelectedItem();        
+        Entry<Integer,String> itemServicio = (Entry<Integer,String>) ComboServicios.getSelectedItem();
+
+        try{
+            int codigoCliente = itemCliente.getKey();
+            int ano = Integer.parseInt(ComboAno.getSelectedItem().toString());
+            int mes = ComboMes.getSelectedIndex() + 1;
+            int dia = Integer.parseInt(ComboDia.getSelectedItem().toString());
+            if(ComboHora.getItemCount() == 0){
+                throw new Exception("El día seleccionado no es un día dentro del horario de atención");
+            }
+            int hora = Integer.parseInt(ComboHora.getSelectedItem().toString());
+            LocalDate fecha = LocalDate.of(ano, mes, dia);
+            int codigoServicio = itemServicio.getKey();
+            admin.crearCita(codigoCliente, fecha, hora, codigoServicio);
+            JOptionPane.showMessageDialog(null, "Cita creada con éxito", "CREACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarListMode();
+    }//GEN-LAST:event_BotonAgregarActionPerformed
+
+    private void ComboMesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboMesActionPerformed
+        int diaSeleccionado = ComboDia.getSelectedIndex();
+        if(diaSeleccionado == -1)
+            diaSeleccionado = 0;
+        cargarDias();
+        ComboDia.setSelectedIndex(diaSeleccionado);
+        cargarHoras();
+    }//GEN-LAST:event_ComboMesActionPerformed
+
+    private void ComboAnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboAnoActionPerformed
+        cargarHoras();
+    }//GEN-LAST:event_ComboAnoActionPerformed
+
+    private void ComboDiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboDiaActionPerformed
+        cargarHoras();
+    }//GEN-LAST:event_ComboDiaActionPerformed
+
+    private void BotonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonEliminarActionPerformed
+        if (ListaCitas.getSelectedIndex() != -1){
+            Entry<Integer, String> cita = ListaCitas.getSelectedValue();
+            int codigoCita = cita.getKey();
+            int eliminar = JOptionPane.showConfirmDialog(null, "¿Desea eliminar esta cita de forma permanente?");
+            if (eliminar == JOptionPane.YES_OPTION){
+                try{
+                    admin.borrarCita(codigoCita);
+                    JOptionPane.showMessageDialog(null, "Cita eliminada con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
+                }catch(Exception e){
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Ninguna cita ha sido seleccionada", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarListMode();
+    }//GEN-LAST:event_BotonEliminarActionPerformed
     private void cargarComboClientes(){
         Map<Integer, String> clientes = admin.getNombreClientes();
         for (Entry <Integer, String> cliente: clientes.entrySet()){
-            ComboClientes.addItem(cliente.getKey() + "= " + cliente.getValue());
+            ComboClientes.addItem(cliente);
         }
+    }
+    private void cargarComboServicios(){
+        Map<Integer, String> servicios = admin.getServicios();
+        for (Entry <Integer, String> servicio: servicios.entrySet()){
+            ComboServicios.addItem(servicio);            
+        }
+    }
+    
+    private void cargarMeses(){
+        ComboMes.addItem("Enero");
+        ComboMes.addItem("Febrero");
+        ComboMes.addItem("Marzo");
+        ComboMes.addItem("Abril");
+        ComboMes.addItem("Mayo");
+        ComboMes.addItem("Junio");
+        ComboMes.addItem("Julio");
+        ComboMes.addItem("Agosto");
+        ComboMes.addItem("Septiembre");
+        ComboMes.addItem("Octubre");
+        ComboMes.addItem("Noviembre");
+        ComboMes.addItem("Diciembre");
+    }
+      
+    private void cargarDias(){
+        ComboDia.removeAllItems();
+        int cantidad = 0;
+        
+        if(ComboMes.getSelectedItem() == "Febrero" ){
+            cantidad = 29;
+        }
+        else if(ComboMes.getSelectedItem() == "Enero" || ComboMes.getSelectedItem() == "Marzo" || ComboMes.getSelectedItem() == "Mayo" || ComboMes.getSelectedItem() == "Julio" || ComboMes.getSelectedItem() == "Agosto" || ComboMes.getSelectedItem() == "Octubre" || ComboMes.getSelectedItem() == "Diciembre"){
+            cantidad = 31;
+        }
+        else{
+            cantidad = 30;
+        }
+        
+        for(int i = 1; i <= cantidad; i++){
+            ComboDia.addItem(String.valueOf(i));
+        }
+        
+        ComboDia.setSelectedItem("1");
+    }
+    
+    private void cargarHoras(){
+        if(ComboAno.getSelectedItem() == null || ComboMes.getSelectedItem() == null || ComboDia.getSelectedItem() == null){
+            return;
+        }
+        ComboHora.removeAllItems();
+        int ano = Integer.parseInt(ComboAno.getSelectedItem().toString());
+        int mes = ComboMes.getSelectedIndex() + 1;
+        int dia = Integer.parseInt(ComboDia.getSelectedItem().toString());
+        LocalDate fecha = LocalDate.of(ano, mes, dia);
+        try{        
+            ArrayList<String> horas = admin.obtenerHorasDia(fecha.getDayOfWeek().getValue());
+            for (String hora: horas){
+                ComboHora.addItem(hora);
+            }
+        }catch(Exception  e){
+            ComboHora.removeAllItems();
+        }
+    }
+    
+    private void actualizarListMode(){
+        DefaultListModel<Entry<Integer, String>> lista = new DefaultListModel();
+        Map<Integer, String> citas = admin.getCitas();
+        for (Entry <Integer, String> cita: citas.entrySet()){
+            lista.addElement(cita);
+        }
+        ListaCitas.setModel(lista);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -135,14 +385,28 @@ public class CitasPanel extends javax.swing.JPanel {
     private javax.swing.JButton BotonConfirmar;
     private javax.swing.JButton BotonEliminar;
     private javax.swing.JButton BotonModificar;
-    private javax.swing.JComboBox<String> ComboClientes;
-    private javax.swing.JComboBox<String> ComboServicios;
-    private javax.swing.JList<String> ListaCitas;
+    private javax.swing.JComboBox<String> ComboAno;
+    private javax.swing.JComboBox<Entry<Integer, String>> ComboClientes;
+    private javax.swing.JComboBox<String> ComboDia;
+    private javax.swing.JComboBox<String> ComboHora;
+    private javax.swing.JComboBox<String> ComboMes;
+    private javax.swing.JComboBox<Entry<Integer, String>> ComboServicios;
+    private javax.swing.JList<Map.Entry<Integer, String>> ListaCitas;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSpinner jSpinner2;
+    private java.awt.Label label1;
     private javax.swing.JLabel labelAgregarCita;
     private javax.swing.JLabel labelCliente;
     private javax.swing.JLabel labelServicio;
+    private javax.swing.JLabel labelServicio1;
+    private javax.swing.JLabel labelServicio2;
+    private javax.swing.JLabel labelServicio3;
     // End of variables declaration//GEN-END:variables
 }

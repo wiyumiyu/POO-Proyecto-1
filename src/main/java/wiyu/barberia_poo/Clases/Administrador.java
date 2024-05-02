@@ -178,21 +178,22 @@ public class Administrador implements Serializable{
     /*
     Método para obtener el Horario 
     */    
-    private HorarioDia obtenerHorario(String dia){ 
+    private HorarioDia obtenerHorario(int dia){ 
         for (HorarioDia horario : listaHorariosDia){ // recorre la lista
-            if (horario.getDia().equals(dia)){ //compara el día de la semana actual con el día de la semana proporcionado 
+            if (horario.getDia() == dia){ //compara el día de la semana actual con el día de la semana proporcionado 
                 return horario; //devuelve el objeto HorarioDia actual y ve que se ha encontrado una coincidencia/choque
             }
         }
         return null;
-    }
+    }       
         
        /*
     Método para crear una Cita 
     */  
     public int crearCita(int codigoCliente, LocalDate dia, int hora, int codigoServicio) throws Exception{
-        HorarioDia horario = obtenerHorario(dia.getDayOfWeek().toString());
-        if (hora < horario.getInicio() || hora < horario.getFin()-1)
+        HorarioDia horario;
+        horario = obtenerHorario(dia.getDayOfWeek().getValue());
+        if (hora < horario.getInicio() || hora > horario.getFin()-1)
             throw new Exception("El día y hora seleccionados no pertenecen al horario de trabajo");
         //validar que el dia y hora no este ocupada en otra cita
         for (Cita cita : citas){
@@ -214,7 +215,7 @@ public class Administrador implements Serializable{
     */ 
     public void modificarCita(int codigoCita, LocalDate dia, int hora, Servicio servicio) throws Exception{
         //validar que el dia y la hora este dentro del horario de atencion
-        HorarioDia horario = obtenerHorario(dia.getDayOfWeek().toString()); 
+        HorarioDia horario = obtenerHorario(dia.getDayOfWeek().getValue()); 
         if (horario == null)
             throw new Exception("El día y hora seleccionados no pertenecen al horario de trabajo");
         //validar que el dia y hora no este ocupada en otra cita
@@ -240,6 +241,17 @@ public class Administrador implements Serializable{
         guardarDatoCita(); //guarda cambios realizados
     }
     
+     /*
+    Método para confirmar una cita 
+    */ 
+    public void confirmarCita(int codigoCita) throws Exception{
+        Cita cita = obtenerCita(codigoCita); // llama a ObtenerCita para tener el codigo de cita y se almacena en cita
+        if (cita == null) //si no encuentra una cita
+            throw new Exception("Cita no existente"); //manda una excepcion
+        cita.confirmarCita();
+        guardarDatoCita(); //guarda cambios realizados
+    }
+    
     /*
     Método para Cosultar un cita y devuelve la información de la cita 
     */ 
@@ -248,17 +260,6 @@ public class Administrador implements Serializable{
         if (cita == null) // si no encuentra una cita manda una excepción
             throw new Exception("Cita no existente");
         return cita.toString(); // si encontró una cita la convierte en una cadena de texto con la información de la cita
-    }
-    
-     /*
-    Método para Confirmar una cita
-    */
-    public void confirmarCita(int codigoCita) throws Exception{
-        Cita cita = obtenerCita(codigoCita); //  
-        if (cita == null)
-            throw new Exception("Cita no existente");
-        cita.setConfirmada(true); //si existe una cita se llama al metodo y cambia el estado de la cita a confirmada
-        guardarDatoCita(); // guarda los cambios
     }
 
      /*
@@ -341,11 +342,44 @@ public class Administrador implements Serializable{
     /*
     Método para Establecer el Horario de Atención al cliente
     */    
-    public void establecerHorarioAtencion(LocalDate dia, int inicio, int fin) throws Exception{
+    public void establecerHorarioAtencion(int dia, int inicio, int fin) throws Exception{
         //Registra el horario de atencion
         HorarioDia horario = new HorarioDia(dia, inicio, fin);
         listaHorariosDia.add(horario);
         guardarDatoHorario();
+    }
+    
+    /*
+    Método para Establecer el Horario de Atención al cliente
+    */    
+    public void borrarHorarioAtencion(int dia) throws Exception{
+        //Borrar el horario de atencion
+        listaHorariosDia.remove(obtenerHorario(dia));
+        guardarDatoHorario();
+    }
+    
+    /*
+    Método para obtener el horario de atencion por dia de la semana
+    */        
+    public ArrayList<String> obtenerHorasDia(int dia) throws Exception {
+        HorarioDia horario = obtenerHorario(dia);
+        if (horario == null)
+            throw new Exception("El día seleccionado no es un día dentro del horario de antención");
+        ArrayList<String> horarioDelDia = new ArrayList<>();
+        for(int i = horario.getInicio(); i < horario.getFin(); i++){
+            horarioDelDia.add(String.valueOf(i));
+        }
+        return horarioDelDia;
+    }
+    
+    /*
+    Método para obtener el horario de atencion por dia de la semana
+    */        
+    public Map<Integer, String> getHorarios() {
+        Map<Integer, String> mapHorarios = new TreeMap();
+        for (HorarioDia horario: listaHorariosDia)
+            mapHorarios.put(horario.getDia(), horario.toString());
+        return mapHorarios;
     }
 
     //Funcion que retorna un Map de servicios con relación Codigo-String
@@ -361,6 +395,13 @@ public class Administrador implements Serializable{
         for (Cliente cliente: clientes)
             mapClientes.put(cliente.getCodigo(), cliente.toString());
         return mapClientes;
+    }
+    //Funcion que retorna un Map de citas con relación Codigo-String
+    public Map<Integer, String> getCitas(){
+        Map<Integer, String> mapCitas = new TreeMap();
+        for (Cita cita: citas)
+            mapCitas.put(cita.getCodigo(), cita.toString());
+        return mapCitas;
     }
     //Funcion que retorna un Map de los nombres de los clientes con relación Codigo-String
     public Map<Integer, String> getNombreClientes(){
