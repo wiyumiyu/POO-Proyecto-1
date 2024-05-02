@@ -148,10 +148,10 @@ public class Cita implements Serializable{
     @Override
     public String toString(){
         String datos = "Código de cita: " + this.codigo + "\n";
-        datos += "Código del cliente: " + this.getCliente().getCodigo() + "\n";
-        datos += "Servicio de cita: " + this.servicio.toString() + "\n";
-        datos += "Día de cita: " + this.dia + "\n";
-        datos += "Hora inicial de la cita: " + this.horaInicial + "\n";
+        datos += " Código del cliente: " + this.getCliente().getCodigo() + "\n";
+        datos += " Servicio de cita: " + this.servicio.toString() + "\n";
+        datos += " Día de cita: " + this.dia + "\n";
+        datos += " Hora inicial de la cita: " + this.horaInicial + "\n";
         return datos;
     }
 
