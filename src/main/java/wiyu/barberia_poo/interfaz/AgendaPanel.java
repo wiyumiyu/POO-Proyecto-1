@@ -111,7 +111,7 @@ public class AgendaPanel extends javax.swing.JPanel {
         buttonGroup1.add(BotonSemanal);
         BotonSemanal.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         BotonSemanal.setForeground(new java.awt.Color(255, 255, 255));
-        BotonSemanal.setText("SEMANAL");
+        BotonSemanal.setText("SEMANA ACTUAL");
         BotonSemanal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BotonSemanalActionPerformed(evt);

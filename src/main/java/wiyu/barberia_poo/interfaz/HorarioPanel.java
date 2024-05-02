@@ -153,6 +153,7 @@ public class HorarioPanel extends javax.swing.JPanel {
         }else{
             JOptionPane.showMessageDialog(null, "Ningún servicio ha sido seleccionado", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
         }
+        ListaHorario.removeAll();
         cargarHorarioDia();
     }//GEN-LAST:event_botonEliminarActionPerformed
 
