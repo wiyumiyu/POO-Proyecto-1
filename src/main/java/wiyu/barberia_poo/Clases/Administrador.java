@@ -28,11 +28,11 @@ para almacenar y controlar los datos
 */
 
 public class Administrador implements Serializable{
-    ArrayList<Cliente> clientes;
-    ArrayList<Cita> citas;
-    ArrayList<Servicio> servicios;
-    ArrayList<Cliente> listaDeEspera;
-    ArrayList<HorarioDia> listaHorariosDia;
+    private ArrayList<Cliente> clientes;
+    private ArrayList<Cita> citas;
+    private ArrayList<Servicio> servicios;
+    private ArrayList<Cliente> listaDeEspera;
+    private ArrayList<HorarioDia> listaHorariosDia;
     
     /*
     Inicializa las lista y carga datos de los clientes,
