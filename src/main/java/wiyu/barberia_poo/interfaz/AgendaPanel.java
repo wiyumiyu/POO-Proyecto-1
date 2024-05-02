@@ -227,7 +227,7 @@ public class AgendaPanel extends javax.swing.JPanel {
             Map<Integer, String> citas = admin.getCitas();
             for (Entry <Integer, String> cita: citas.entrySet()){
                 LocalDate fechaCita = admin.getDate(cita.getKey());
-                if (fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth() && fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth()+7)
+                if (fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth() && fechaCita.getDayOfMonth()<=LocalDate.now().getDayOfMonth()+7)
                     lista.addElement(cita);
             }
             ListaCitas.setModel(lista);
