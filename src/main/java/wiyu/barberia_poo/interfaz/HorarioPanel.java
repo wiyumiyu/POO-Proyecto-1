@@ -42,6 +42,10 @@ public class HorarioPanel extends javax.swing.JPanel {
         ComboFin = new javax.swing.JComboBox<>();
         botonEliminar = new javax.swing.JButton();
         agregarHorario = new javax.swing.JButton();
+        LabelAgregarHorario = new javax.swing.JLabel();
+        LabelCierre = new javax.swing.JLabel();
+        LabelInicio = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -63,7 +67,7 @@ public class HorarioPanel extends javax.swing.JPanel {
         jPanel1.add(ComboInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 340, 90, 30));
 
         ComboFin.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00", "24:00" }));
-        jPanel1.add(ComboFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 80, 30));
+        jPanel1.add(ComboFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 340, 80, 30));
 
         botonEliminar.setText("Eliminar");
         botonEliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +84,26 @@ public class HorarioPanel extends javax.swing.JPanel {
             }
         });
         jPanel1.add(agregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 400, 80, 30));
+
+        LabelAgregarHorario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelAgregarHorario.setForeground(new java.awt.Color(255, 255, 255));
+        LabelAgregarHorario.setText("AGREGAR HORARIO DE ATENCIÓN");
+        jPanel1.add(LabelAgregarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 290, -1, -1));
+
+        LabelCierre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelCierre.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCierre.setText("HORA DE CIERRE");
+        jPanel1.add(LabelCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 320, -1, -1));
+
+        LabelInicio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelInicio.setForeground(new java.awt.Color(255, 255, 255));
+        LabelInicio.setText("HORA DE INICIO");
+        jPanel1.add(LabelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("DÍA");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 320, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Horario.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -146,10 +170,14 @@ public class HorarioPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ComboDia;
     private javax.swing.JComboBox<String> ComboFin;
     private javax.swing.JComboBox<String> ComboInicio;
+    private javax.swing.JLabel LabelAgregarHorario;
+    private javax.swing.JLabel LabelCierre;
+    private javax.swing.JLabel LabelInicio;
     private javax.swing.JList<Map.Entry<Integer, String>> ListaHorario;
     private javax.swing.JButton agregarHorario;
     private javax.swing.JButton botonEliminar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

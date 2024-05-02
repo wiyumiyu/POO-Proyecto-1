@@ -423,6 +423,15 @@ public class Administrador implements Serializable{
             mapClientes.put(cliente.getCodigo(), cliente.toString());
         return mapClientes;
     }
+    /*
+    Método para obtener la fecha de una cita
+    */    
+    public LocalDate getDate(int codigoCita) throws Exception{
+        Cita cita = obtenerCita(codigoCita);
+        if (cita == null)
+            throw new Exception("Cita no existente");
+        return cita.getDia();
+    }
      /*
     Método para Guardar los datos del Cliente 
     */      
