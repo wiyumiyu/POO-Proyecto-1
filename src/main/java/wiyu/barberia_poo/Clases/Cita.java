@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Properties;
 import javax.mail.*;  
-import javax.mail.internet.*;  
+import javax.mail.internet.*;
 
 /*
 Proyecto 1 POO - Barbería

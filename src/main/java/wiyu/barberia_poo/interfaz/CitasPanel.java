@@ -142,7 +142,6 @@ public class CitasPanel extends javax.swing.JPanel {
         jLabel4.setText("FECHA");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 340, 100, -1));
 
-        ComboDia.setSelectedIndex(-1);
         ComboDia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboDiaActionPerformed(evt);
@@ -150,7 +149,6 @@ public class CitasPanel extends javax.swing.JPanel {
         });
         jPanel1.add(ComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, 50, 30));
 
-        ComboMes.setSelectedIndex(-1);
         ComboMes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboMesActionPerformed(evt);
@@ -164,7 +162,6 @@ public class CitasPanel extends javax.swing.JPanel {
         jLabel6.setText("HORA");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 340, 60, -1));
 
-        ComboHora.setSelectedIndex(-1);
         ComboHora.setName("ComboHora"); // NOI18N
         jPanel1.add(ComboHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 370, -1, 30));
 
@@ -208,9 +205,7 @@ public class CitasPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 87, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

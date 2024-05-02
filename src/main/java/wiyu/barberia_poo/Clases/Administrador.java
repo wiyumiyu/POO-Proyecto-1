@@ -289,6 +289,10 @@ public class Administrador implements Serializable{
         Servicio servicio = obtenerServicio(codigoServicio);
         if (servicio == null)
             throw new Exception("Servicio no existente");
+        for (Cita cita : citas){
+            if (cita.getConfirmada() && cita.getServicio() == servicio)
+                throw new Exception("El servicio está siendo utilizado en una cita ya confirmada");
+        }
         servicios.remove(servicio); // si encuentra un servicio borra el servicio
         guardarDatoServicio();
     }
