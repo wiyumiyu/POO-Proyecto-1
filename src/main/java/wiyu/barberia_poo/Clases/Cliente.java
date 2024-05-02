@@ -19,7 +19,6 @@ public class Cliente implements Serializable{
     private String nombre;
     private String telefono;
     private String correo;
-    private ArrayList<Cita> citas;
     
         
      public Cliente(String nombre, String telefono, String correo) {
@@ -98,17 +97,7 @@ public class Cliente implements Serializable{
         this.telefono = telefono;
         this.nombre = nombre;
     }
-    
-    public Cita obtenerCita(int codigoCita){
-        for (Cita cita : citas){
-            if (cita.getCodigo() == codigoCita)
-                return cita;
-        }
-        return null;
-    }
-    public void guardarCita(Cita cita){
-        this.citas.add(cita);
-    }
+        
     @Override
     public String toString() {
         String result = "Nombre: " + nombre +"\n";
