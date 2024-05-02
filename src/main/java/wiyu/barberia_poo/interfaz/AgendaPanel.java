@@ -45,13 +45,16 @@ public class AgendaPanel extends javax.swing.JPanel {
         ComboMes = new javax.swing.JComboBox<>();
         ComboAno = new javax.swing.JComboBox<>();
         ComboDia = new javax.swing.JComboBox<>();
+        ComboMensual = new javax.swing.JComboBox<>();
         BotonPorFecha = new javax.swing.JRadioButton();
         BotonMensual = new javax.swing.JRadioButton();
         BotonSemanal = new javax.swing.JRadioButton();
+        LabelMensual = new javax.swing.JLabel();
         LabelSolicitarDatos = new javax.swing.JLabel();
         LabelAno = new javax.swing.JLabel();
         LabelMes = new javax.swing.JLabel();
         LabelDia = new javax.swing.JLabel();
+        BotonFiltrar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -79,6 +82,9 @@ public class AgendaPanel extends javax.swing.JPanel {
 
         jPanel1.add(ComboDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 390, 130, 30));
         ComboDia.setVisible(false);
+
+        jPanel1.add(ComboMensual, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 100, 140, -1));
+        ComboMensual.setVisible(false);
 
         buttonGroup1.add(BotonPorFecha);
         BotonPorFecha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -113,6 +119,12 @@ public class AgendaPanel extends javax.swing.JPanel {
         });
         jPanel1.add(BotonSemanal, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
+        LabelMensual.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelMensual.setForeground(new java.awt.Color(255, 255, 255));
+        LabelMensual.setText("CITAS DEL MES");
+        jPanel1.add(LabelMensual, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+        LabelMensual.setVisible(false);
+
         LabelSolicitarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         LabelSolicitarDatos.setForeground(new java.awt.Color(255, 255, 255));
         LabelSolicitarDatos.setText("INGRESE LA FECHA DESDE LA QUE DESEA CONSULTAR");
@@ -136,6 +148,15 @@ public class AgendaPanel extends javax.swing.JPanel {
         LabelDia.setText("DÍA");
         jPanel1.add(LabelDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 360, -1, -1));
         LabelDia.setVisible(false);
+
+        BotonFiltrar.setText("Filtrar");
+        BotonFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonFiltrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonFiltrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 130, 90, 30));
+        BotonFiltrar.setVisible(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/Agenda.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -174,6 +195,9 @@ public class AgendaPanel extends javax.swing.JPanel {
         ComboMes.setVisible(false);
         ComboDia.setVisible(false);
         BotonBuscar.setVisible(false);
+        ComboMensual.setVisible(false);
+        LabelMensual.setVisible(false);
+        BotonFiltrar.setVisible(false);
         actualizarModeSemanal();
     }//GEN-LAST:event_BotonSemanalActionPerformed
 
@@ -186,6 +210,9 @@ public class AgendaPanel extends javax.swing.JPanel {
         ComboMes.setVisible(true);
         ComboDia.setVisible(true);
         BotonBuscar.setVisible(true);
+        ComboMensual.setVisible(false);
+        LabelMensual.setVisible(false);
+        BotonFiltrar.setVisible(false);
     }//GEN-LAST:event_BotonPorFechaActionPerformed
 
     private void BotonMensualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonMensualActionPerformed
@@ -197,8 +224,14 @@ public class AgendaPanel extends javax.swing.JPanel {
         ComboMes.setVisible(false);
         ComboDia.setVisible(false);
         BotonBuscar.setVisible(false);
-        actualizarModeMensual();
+        ComboMensual.setVisible(true);
+        LabelMensual.setVisible(true);
+        BotonFiltrar.setVisible(true);
     }//GEN-LAST:event_BotonMensualActionPerformed
+
+    private void BotonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonFiltrarActionPerformed
+        actualizarModeMensual();
+    }//GEN-LAST:event_BotonFiltrarActionPerformed
     private void actualizarModeDesdeFecha(LocalDate fecha){
         try{
             DefaultListModel<Entry<Integer, String>> lista = new DefaultListModel();
@@ -227,7 +260,7 @@ public class AgendaPanel extends javax.swing.JPanel {
             Map<Integer, String> citas = admin.getCitas();
             for (Entry <Integer, String> cita: citas.entrySet()){
                 LocalDate fechaCita = admin.getDate(cita.getKey());
-                if (fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth() && fechaCita.getDayOfMonth()<=LocalDate.now().getDayOfMonth()+7)
+                if (fechaCita.getMonthValue() == LocalDate.now().getMonthValue() && fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth() && fechaCita.getDayOfMonth()<LocalDate.now().getDayOfMonth()+7)
                     lista.addElement(cita);
             }
             ListaCitas.setModel(lista);
@@ -241,7 +274,7 @@ public class AgendaPanel extends javax.swing.JPanel {
             Map<Integer, String> citas = admin.getCitas();
             for (Entry <Integer, String> cita: citas.entrySet()){
                 LocalDate fechaCita = admin.getDate(cita.getKey());
-                if (fechaCita.getDayOfMonth()>=LocalDate.now().getDayOfMonth() && fechaCita.getMonthValue() == LocalDate.now().getMonthValue())
+                if (fechaCita.getMonthValue() == ComboMensual.getSelectedIndex()+1)
                     lista.addElement(cita);
             }
             ListaCitas.setModel(lista);
@@ -262,6 +295,19 @@ public class AgendaPanel extends javax.swing.JPanel {
         ComboMes.addItem("Octubre");
         ComboMes.addItem("Noviembre");
         ComboMes.addItem("Diciembre");
+        
+        ComboMensual.addItem("Enero");
+        ComboMensual.addItem("Febrero");
+        ComboMensual.addItem("Marzo");
+        ComboMensual.addItem("Abril");
+        ComboMensual.addItem("Mayo");
+        ComboMensual.addItem("Junio");
+        ComboMensual.addItem("Julio");
+        ComboMensual.addItem("Agosto");
+        ComboMensual.addItem("Septiembre");
+        ComboMensual.addItem("Octubre");
+        ComboMensual.addItem("Noviembre");
+        ComboMensual.addItem("Diciembre");
     }
     private void cargarDias(){
         ComboDia.removeAllItems();
@@ -286,14 +332,17 @@ public class AgendaPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonBuscar;
+    private javax.swing.JButton BotonFiltrar;
     private javax.swing.JRadioButton BotonMensual;
     private javax.swing.JRadioButton BotonPorFecha;
     private javax.swing.JRadioButton BotonSemanal;
     private javax.swing.JComboBox<String> ComboAno;
     private javax.swing.JComboBox<String> ComboDia;
+    private javax.swing.JComboBox<String> ComboMensual;
     private javax.swing.JComboBox<String> ComboMes;
     private javax.swing.JLabel LabelAno;
     private javax.swing.JLabel LabelDia;
+    private javax.swing.JLabel LabelMensual;
     private javax.swing.JLabel LabelMes;
     private javax.swing.JLabel LabelSolicitarDatos;
     private javax.swing.JList<Map.Entry<Integer, String>> ListaCitas;

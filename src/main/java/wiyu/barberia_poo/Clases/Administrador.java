@@ -290,7 +290,7 @@ public class Administrador implements Serializable{
         if (servicio == null)
             throw new Exception("Servicio no existente");
         for (Cita cita : citas){
-            if (cita.getConfirmada() && cita.getServicio() == servicio)
+            if (cita.getConfirmada() && cita.getServicio().getCodigo() == servicio.getCodigo())
                 throw new Exception("El servicio está siendo utilizado en una cita ya confirmada");
         }
         servicios.remove(servicio); // si encuentra un servicio borra el servicio
