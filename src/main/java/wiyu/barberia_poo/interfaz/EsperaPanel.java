@@ -120,6 +120,7 @@ public class EsperaPanel extends javax.swing.JPanel {
             if (eliminar == JOptionPane.YES_OPTION){
                 try{
                     admin.borrarClienteListaEspera(codigoCliente);
+                    ComboClientes.addItem(cliente);
                     JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "ELIMINACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE); 
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);  

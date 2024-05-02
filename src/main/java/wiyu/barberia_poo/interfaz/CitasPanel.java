@@ -60,12 +60,12 @@ public class CitasPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         ComboHora = new javax.swing.JComboBox<>();
         ComboAno = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        labelServicio1 = new javax.swing.JLabel();
-        labelServicio2 = new javax.swing.JLabel();
-        labelServicio3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSpinner2 = new javax.swing.JSpinner();
+        LabelCambiarDatos = new javax.swing.JLabel();
+        BotonConfirmarModificacion = new javax.swing.JButton();
+        BotonCancelarModificacion = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setText("jLabel2");
 
@@ -81,6 +81,11 @@ public class CitasPanel extends javax.swing.JPanel {
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 610, 150));
 
         BotonModificar.setText("Modificar");
+        BotonModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonModificarActionPerformed(evt);
+            }
+        });
         jPanel1.add(BotonModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 230, 90, 30));
 
         BotonEliminar.setText("Eliminar");
@@ -174,24 +179,6 @@ public class CitasPanel extends javax.swing.JPanel {
         });
         jPanel1.add(ComboAno, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, 70, 30));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/cit.png"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
-
-        labelServicio1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelServicio1.setForeground(new java.awt.Color(255, 255, 255));
-        labelServicio1.setText("SERVICIO");
-        jPanel1.add(labelServicio1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
-
-        labelServicio2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelServicio2.setForeground(new java.awt.Color(255, 255, 255));
-        labelServicio2.setText("SERVICIO");
-        jPanel1.add(labelServicio2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
-
-        labelServicio3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        labelServicio3.setForeground(new java.awt.Color(255, 255, 255));
-        labelServicio3.setText("SERVICIO");
-        jPanel1.add(labelServicio3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
-
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -200,6 +187,33 @@ public class CitasPanel extends javax.swing.JPanel {
 
         jSpinner2.setName("SpinnerAno"); // NOI18N
         jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 370, -1, 30));
+
+        LabelCambiarDatos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        LabelCambiarDatos.setForeground(new java.awt.Color(255, 255, 255));
+        LabelCambiarDatos.setText("INGRESE LOS NUEVOS DATOS DE LA CITA");
+        jPanel1.add(LabelCambiarDatos, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, -1, -1));
+        LabelCambiarDatos.setVisible(false);
+
+        BotonConfirmarModificacion.setText("Confirmar");
+        BotonConfirmarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonConfirmarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonConfirmarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 430, 130, 30));
+        BotonConfirmarModificacion.setVisible(false);
+
+        BotonCancelarModificacion.setText("Cancelar");
+        BotonCancelarModificacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BotonCancelarModificacionActionPerformed(evt);
+            }
+        });
+        jPanel1.add(BotonCancelarModificacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, 130, 30));
+        BotonCancelarModificacion.setVisible(false);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/wiyu/barberia_poo/BancoImagen/cit.png"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -298,6 +312,56 @@ public class CitasPanel extends javax.swing.JPanel {
         }
         actualizarListMode();
     }//GEN-LAST:event_BotonEliminarActionPerformed
+
+    private void BotonModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonModificarActionPerformed
+        labelAgregarCita.setVisible(false);
+        LabelCambiarDatos.setVisible(true);
+        BotonConfirmarModificacion.setVisible(true);
+        BotonCancelarModificacion.setVisible(true);
+        BotonAgregar.setVisible(false);
+        ComboClientes.setEnabled(false);
+    }//GEN-LAST:event_BotonModificarActionPerformed
+
+    private void BotonConfirmarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonConfirmarModificacionActionPerformed
+        labelAgregarCita.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        ComboClientes.setEnabled(true);
+        Entry<Integer,String> itemServicio = (Entry<Integer,String>) ComboServicios.getSelectedItem();
+        try{
+            if (ListaCitas.getSelectedIndex() != -1){
+                Map.Entry<Integer, String> cita = ListaCitas.getSelectedValue();
+                int codigoCita = cita.getKey();
+                int ano = Integer.parseInt(ComboAno.getSelectedItem().toString());
+                int mes = ComboMes.getSelectedIndex() + 1;
+                int dia = Integer.parseInt(ComboDia.getSelectedItem().toString());
+                if(ComboHora.getItemCount() == 0){
+                    throw new Exception("El día seleccionado no es un día dentro del horario de atención");
+                }
+                int hora = Integer.parseInt(ComboHora.getSelectedItem().toString());
+                LocalDate fecha = LocalDate.of(ano, mes, dia);
+                int codigoServicio = itemServicio.getKey();
+                admin.modificarCita(codigoCita, fecha, hora, codigoServicio);
+                JOptionPane.showMessageDialog(null, "Cita modificada con éxito", "MODIFICACIÓN FINALIZADA", JOptionPane.INFORMATION_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Ninguna cita ha sido seleccionada", "ERROR DE SELECCIÓN", JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(Exception  e){
+            JOptionPane.showMessageDialog(null, e.getMessage(), "ERROR EN DATOS INGRESADOS", JOptionPane.ERROR_MESSAGE);
+        }
+        actualizarListMode();
+    }//GEN-LAST:event_BotonConfirmarModificacionActionPerformed
+
+    private void BotonCancelarModificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCancelarModificacionActionPerformed
+        labelAgregarCita.setVisible(true);
+        LabelCambiarDatos.setVisible(false);
+        BotonConfirmarModificacion.setVisible(false);
+        BotonCancelarModificacion.setVisible(false);
+        BotonAgregar.setVisible(true);
+        ComboClientes.setEnabled(true);
+    }//GEN-LAST:event_BotonCancelarModificacionActionPerformed
     private void cargarComboClientes(){
         Map<Integer, String> clientes = admin.getNombreClientes();
         for (Entry <Integer, String> cliente: clientes.entrySet()){
@@ -377,7 +441,9 @@ public class CitasPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonAgregar;
+    private javax.swing.JButton BotonCancelarModificacion;
     private javax.swing.JButton BotonConfirmar;
+    private javax.swing.JButton BotonConfirmarModificacion;
     private javax.swing.JButton BotonEliminar;
     private javax.swing.JButton BotonModificar;
     private javax.swing.JComboBox<String> ComboAno;
@@ -386,6 +452,7 @@ public class CitasPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> ComboHora;
     private javax.swing.JComboBox<String> ComboMes;
     private javax.swing.JComboBox<Entry<Integer, String>> ComboServicios;
+    private javax.swing.JLabel LabelCambiarDatos;
     private javax.swing.JList<Map.Entry<Integer, String>> ListaCitas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -400,8 +467,5 @@ public class CitasPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labelAgregarCita;
     private javax.swing.JLabel labelCliente;
     private javax.swing.JLabel labelServicio;
-    private javax.swing.JLabel labelServicio1;
-    private javax.swing.JLabel labelServicio2;
-    private javax.swing.JLabel labelServicio3;
     // End of variables declaration//GEN-END:variables
 }

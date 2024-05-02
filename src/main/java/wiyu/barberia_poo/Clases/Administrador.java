@@ -213,21 +213,21 @@ public class Administrador implements Serializable{
         /*
     Método para modificar una Cita
     */ 
-    public void modificarCita(int codigoCita, LocalDate dia, int hora, Servicio servicio) throws Exception{
+    public void modificarCita(int codigoCita, LocalDate dia, int hora, int codigoServicio) throws Exception{
         //validar que el dia y la hora este dentro del horario de atencion
         HorarioDia horario = obtenerHorario(dia.getDayOfWeek().getValue()); 
         if (horario == null)
             throw new Exception("El día y hora seleccionados no pertenecen al horario de trabajo");
         //validar que el dia y hora no este ocupada en otra cita
         for (Cita cita : citas){
-            if (cita.getDia() == dia && cita.getHoraInicial() == hora && cita.getCodigo() != codigoCita){
+            if (cita.getDia().equals(dia) && cita.getHoraInicial() == hora && cita.getCodigo() != codigoCita){
                 throw new Exception("Ya existe una cita en el día y hora seleccionados");
             }
         }
         Cita cita = obtenerCita(codigoCita);
         if (cita == null)
             throw new Exception("Cita no existente");
-        cita.modificarCita(dia, hora, servicio);
+        cita.modificarCita(dia, hora, obtenerServicio(codigoServicio));
         guardarDatoCita();
     }
         /*
